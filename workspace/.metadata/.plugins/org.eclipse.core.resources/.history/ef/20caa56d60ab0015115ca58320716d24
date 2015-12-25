@@ -55,27 +55,16 @@ public class ValueIteration {
 	public static void set_speed(int discretisation_speed, double speed){
 		for(int i = 0 ; i < discretisation_speed; i++){
 			speed_array.add( (-1) * speed + i * frequency_speed);
-			System.out.println("Vitesse = "+i+", et pour valeur = "+speed_array.get(i));
+			System.out.println("Speed = "+i+", et pour valeur = "+speed_array.get(i));
 		}
 	}
 	
-	public static void set_reward_init(int discretisation_position, double ravine){
-		for(int i = 0; i < discretisation_position; i++){
-			if(X_array.get(i) <= ravine){
-				reward.add(-1);
-				System.out.println("Recompense pour "+i+", a pour valeur = "+reward.get(i));
-			}else{
-				reward.add(0);
-				System.out.println("Recompense pour "+i+", a pour valeur = "+reward.get(i));
-			}
-		}
-	}
+	public static void set_reward()
 	
 	public static void main(String[] args) {
 		set_frequency_position(32, -1.2, 0.6);
 		set_frequency_speed(32, 0.07);
 		set_X(32, -1.2);
 		set_speed(32, 0.07);
-		set_reward_init(32, -1.15);
 	}
 }
