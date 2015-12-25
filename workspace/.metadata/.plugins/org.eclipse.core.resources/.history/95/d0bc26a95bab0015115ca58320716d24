@@ -14,14 +14,12 @@ public class ValueIteration {
 	static double speed;
 	static double high_border;
 	static double low_border;
-	static double reward_border;
 	static double frequency_position;
 	static double frequency_speed;
 	static ArrayList<Double> X_array = new ArrayList<Double>();
 	static ArrayList<Double> speed_array = new ArrayList<Double>();
-	static ArrayList<Integer> reward = new ArrayList<Integer>();
 	
-	public ValueIteration(double gamma, double epsilon, int discretisation_position, int discretisation_speed, double height, double slope, double ravine, double speed, double high_border, double low_border, double reward_border ){
+	public ValueIteration(double gamma, double epsilon, int discretisation_position, int discretisation_speed, double height, double slope, double ravine, double speed, double high_border, double low_border ){
 		this.gamma = gamma;
 		this.epsilon = epsilon;
 		this.discretisation_position = discretisation_position;
@@ -32,7 +30,6 @@ public class ValueIteration {
 		this.speed = speed;
 		this.high_border = high_border;
 		this.low_border = low_border;
-		this.reward_border = reward_border;
 	}
 	
 	public static void set_frequency_position(double discretisation_position, double low_border, double high_border){
@@ -55,19 +52,7 @@ public class ValueIteration {
 	public static void set_speed(int discretisation_speed, double speed){
 		for(int i = 0 ; i < discretisation_speed; i++){
 			speed_array.add( (-1) * speed + i * frequency_speed);
-			System.out.println("Vitesse = "+i+", et pour valeur = "+speed_array.get(i));
-		}
-	}
-	
-	public static void set_reward_init(int discretisation_position, double ravine){
-		for(int i = 0; i < discretisation_position; i++){
-			if(X_array.get(i) <= ravine){
-				reward.add(-1);
-				System.out.println("Recompense pour "+i+", a pour valeur = "+reward.get(i));
-			}else{
-				reward.add(0);
-				System.out.println("Recompense pour "+i+", a pour valeur = "+reward.get(i));
-			}
+			System.out.println("Speed = "+i+", et pour valeur = "+speed_array.get(i));
 		}
 	}
 	
@@ -76,6 +61,5 @@ public class ValueIteration {
 		set_frequency_speed(32, 0.07);
 		set_X(32, -1.2);
 		set_speed(32, 0.07);
-		set_reward_init(32, -1.15);
 	}
 }
