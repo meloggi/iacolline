@@ -1,0 +1,37 @@
+package markov;
+
+public class ValueIteration {
+
+	static double gamma; 
+	static double epsilon;
+	static int discretisation;
+	static double height; 
+	static double slope;
+	static double ravine;
+	static double speed;
+	static double high_border;
+	static double low_border;
+	static int frequency;
+	
+	public ValueIteration(double gamma, double epsilon, int discretisation, double height, double slope, double ravine, double speed, double high_border, double low_border ){
+		this.gamma = gamma;
+		this.epsilon = epsilon;
+		this.discretisation = discretisation;
+		this.height = height;
+		this.slope = slope;
+		this.ravine = ravine;
+		this.speed = speed;
+		this.high_border = high_border;
+		this.low_border = low_border;
+	}
+	
+	
+	public static void set_frequency(double discretisation, double high_border, double low_border){
+		frequency = (int) ((high_border - low_border) / discretisation);
+		System.out.println(frequency);
+	}
+	
+	public static void main(String[] args) {
+		set_frequency(32, -1.2, 0.6);
+	}
+}
