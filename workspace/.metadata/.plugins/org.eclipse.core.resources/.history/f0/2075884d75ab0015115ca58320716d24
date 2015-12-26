@@ -138,7 +138,7 @@ public class ValueIteration {
 		set_X(32, -1.2);
 		set_current_position(0.4874999999999998);
 		set_speed(32, 0.07);
-		set_current_speed(0.06125);
+		set_current_speed(0);
 		//set_frequency_position(32, -1.2, 0.6);
 		//set_frequency_speed(32, 0.07);
 		//set_X(32, -1.2);
