@@ -156,7 +156,7 @@ public class ValueIteration {
 	public static void set_current_reward(int discretisation_position, int current_speed){
 		for(int i = 0; i < discretisation_position; i++){
 			if(X_array.get(i) >= reward_border){
-				reward.set(i, 0.07-Math.abs(speed_array.get(current_speed)));
+				reward.add(0.07-Math.abs(speed_array.get(current_speed)));
 				System.out.println("Recompense pour "+i+", a pour valeur = "+reward.get(i));
 			}
 		}
@@ -164,7 +164,6 @@ public class ValueIteration {
 	
 	public static void main(String[] args) {
 		init(32, 32, -1.2, -1.15, 0.54, 0.6, 0.07, 0.99, 0.01, 0, 0, 0.0025, 3);
-		set_current_reward(32, 3);
 		//set_X(32, -1.2);
 		//set_current_position(0.4874999999999998);
 		//set_speed(32, 0.07);

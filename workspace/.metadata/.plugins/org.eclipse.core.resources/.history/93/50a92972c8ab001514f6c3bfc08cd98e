@@ -37,13 +37,6 @@ public class ValueIteration {
 		this.reward_border = reward_border;
 	}
 	
-	
-	////////////////////////////////////////////////////////////////////////////////////
-	////////																	////////
-	////////							Initialisation							////////
-	////////																	////////
-	////////////////////////////////////////////////////////////////////////////////////
-	
 	public static void set_frequency_position(double discretisation_position, double low_border, double high_border){
 		frequency_position = (( Math.abs(high_border) + Math.abs(low_border)) / discretisation_position);
 		System.out.println("Valeur du pas de la position = "+frequency_position);
@@ -106,13 +99,6 @@ public class ValueIteration {
 		set_reward_init(discretisation_position, ravine, current_speed);
 	}
 	
-	
-	////////////////////////////////////////////////////////////////////////////////////
-	////////																	////////
-	////////							Current									////////
-	////////																	////////
-	////////////////////////////////////////////////////////////////////////////////////
-	
 	public static void set_current_position(double position){
 		if(position >= X_array.get(discretisation_position-1)){
 			ValueIteration.current_position = discretisation_position-1;
@@ -153,22 +139,12 @@ public class ValueIteration {
 		System.out.println(ValueIteration.current_speed);
 	}
 	
-	public static void set_current_reward(int discretisation_position, int current_speed){
-		for(int i = 0; i < discretisation_position; i++){
-			if(X_array.get(i) >= reward_border){
-				reward.set(i, 0.07-Math.abs(speed_array.get(current_speed)));
-				System.out.println("Recompense pour "+i+", a pour valeur = "+reward.get(i));
-			}
-		}
-	}
-	
 	public static void main(String[] args) {
-		init(32, 32, -1.2, -1.15, 0.54, 0.6, 0.07, 0.99, 0.01, 0, 0, 0.0025, 3);
-		set_current_reward(32, 3);
-		//set_X(32, -1.2);
-		//set_current_position(0.4874999999999998);
-		//set_speed(32, 0.07);
-		//set_current_speed(0.06125);
+		init(32, 32, -1.2, -1.15, 0.55, 0.6, 0.07, 0.99, 0.01, 0, 3, 0.0025, 3);
+		set_X(32, -1.2);
+		set_current_position(0.4874999999999998);
+		set_speed(32, 0.07);
+		set_current_speed(0.06125);
 		//set_frequency_position(32, -1.2, 0.6);
 		//set_frequency_speed(32, 0.07);
 		//set_X(32, -1.2);
