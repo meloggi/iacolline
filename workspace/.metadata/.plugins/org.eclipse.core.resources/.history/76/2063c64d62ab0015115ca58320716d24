@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class ValueIteration {
 
-	private static double gamma; 
+	static double gamma; 
 	static double epsilon;
 	static int discretisation_position;
 	static int discretisation_speed;
@@ -71,24 +71,11 @@ public class ValueIteration {
 		}
 	}
 	
-	public static void init(int discretisation_position, int discretisation_speed, double low_border, double ravine, double high_border, double speed, double gamma, double epsilon){
-		ValueIteration.gamma = gamma;
-		ValueIteration.epsilon = epsilon;
-		System.out.println("Gamma = "+ValueIteration.gamma);
-		System.out.println("Epsilon = "+ValueIteration.epsilon);
-		set_frequency_position(discretisation_position, low_border, high_border); 
-		set_frequency_speed(discretisation_speed, speed);
-		set_X(discretisation_position, low_border);
-		set_speed(discretisation_speed, speed);
-		set_reward_init(discretisation_position, ravine);
-	}
-	
 	public static void main(String[] args) {
-		init(32, 32, -1.2, -1.15, 0.6, 0.07, 0.99, 0.01);
-		//set_frequency_position(32, -1.2, 0.6);
-		//set_frequency_speed(32, 0.07);
-		//set_X(32, -1.2);
-		//set_speed(32, 0.07);
-		//set_reward_init(32, -1.15);
+		set_frequency_position(32, -1.2, 0.6);
+		set_frequency_speed(32, 0.07);
+		set_X(32, -1.2);
+		set_speed(32, 0.07);
+		set_reward_init(32, -1.15);
 	}
 }
