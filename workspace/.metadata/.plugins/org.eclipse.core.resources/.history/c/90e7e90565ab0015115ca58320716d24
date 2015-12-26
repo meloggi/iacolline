@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class ValueIteration {
 
-	static double gamma; 
+	private static double gamma; 
 	static double epsilon;
 	static int discretisation_position;
 	static int discretisation_speed;
