@@ -73,7 +73,7 @@ public class ValueIteration {
 		}
 	}
 	
-	public static void init(int discretisation_position, int discretisation_speed, double low_border, double ravine, double reward_border,double high_border, double limit_speed, double gamma, double epsilon, int current_position, int current_speed, double height, double slope){
+	public static void init(int discretisation_position, int discretisation_speed, double low_border, double ravine, double high_border, double limit_speed, double gamma, double epsilon, int current_position, int current_speed){
 		ValueIteration.gamma = gamma;
 		ValueIteration.epsilon = epsilon;
 		ValueIteration.discretisation_position = discretisation_position;
@@ -84,9 +84,6 @@ public class ValueIteration {
 		ValueIteration.low_border = low_border;
 		ValueIteration.current_position = current_position;
 		ValueIteration.current_speed = current_speed;
-		ValueIteration.height = height; 
-		ValueIteration.slope = slope;
-		ValueIteration.reward_border = reward_border;
 		System.out.println("Gamma = "+ValueIteration.gamma);
 		System.out.println("Epsilon = "+ValueIteration.epsilon);
 		set_frequency_position(discretisation_position, low_border, high_border); 
@@ -137,7 +134,7 @@ public class ValueIteration {
 	}
 	
 	public static void main(String[] args) {
-		init(32, 32, -1.2, -1.15, 0.55, 0.6, 0.07, 0.99, 0.01, 0, 0, 0.0025, 3);
+		init(32, 32, -1.2, -1.15, 0.6, 0.07, 0.99, 0.01, 0, 0);
 		set_X(32, -1.2);
 		set_current_position(0.4874999999999998);
 		set_speed(32, 0.07);
