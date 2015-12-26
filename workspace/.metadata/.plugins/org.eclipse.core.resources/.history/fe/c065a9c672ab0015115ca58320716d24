@@ -101,8 +101,7 @@ public class ValueIteration {
 			while (position >= X_array.get(i)){
 				i++;
 			}
-			i--;
-			if( (Math.abs(Math.abs(position)-Math.abs(X_array.get(i)))) < (Math.abs(Math.abs(position)-Math.abs(X_array.get(i+1)))) ){
+			if(position-X_array.get(i) < X_array.get(i+1)-position)){
 				ValueIteration.current_position = i;
 			}else{
 				ValueIteration.current_position = i+1;
@@ -115,7 +114,7 @@ public class ValueIteration {
 	public static void main(String[] args) {
 		init(32, 32, -1.2, -1.15, 0.6, 0.07, 0.99, 0.01);
 		set_X(32, -1.2);
-		set_current_position(0.4874999999999998);
+		set_current_position(0.433);
 		//set_frequency_position(32, -1.2, 0.6);
 		//set_frequency_speed(32, 0.07);
 		//set_X(32, -1.2);

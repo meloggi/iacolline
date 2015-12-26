@@ -76,12 +76,6 @@ public class ValueIteration {
 	public static void init(int discretisation_position, int discretisation_speed, double low_border, double ravine, double high_border, double limit_speed, double gamma, double epsilon){
 		ValueIteration.gamma = gamma;
 		ValueIteration.epsilon = epsilon;
-		ValueIteration.discretisation_position = discretisation_position;
-		ValueIteration.discretisation_speed = discretisation_speed;
-		ValueIteration.ravine = ravine;
-		ValueIteration.limit_speed = limit_speed;
-		ValueIteration.high_border = high_border;
-		ValueIteration.low_border = low_border;
 		System.out.println("Gamma = "+ValueIteration.gamma);
 		System.out.println("Epsilon = "+ValueIteration.epsilon);
 		set_frequency_position(discretisation_position, low_border, high_border); 
@@ -92,7 +86,7 @@ public class ValueIteration {
 	}
 	
 	public static void set_current_position(double position){
-		if(position >= X_array.get(discretisation_position-1)){
+		/*if(position >= X_array.get(discretisation_position-1)){
 			ValueIteration.current_position = discretisation_position-1;
 		}else if(position <= X_array.get(0)){
 			ValueIteration.current_position = 0;
@@ -101,21 +95,20 @@ public class ValueIteration {
 			while (position >= X_array.get(i)){
 				i++;
 			}
-			i--;
-			if( (Math.abs(Math.abs(position)-Math.abs(X_array.get(i)))) < (Math.abs(Math.abs(position)-Math.abs(X_array.get(i+1)))) ){
+			if(Math.abs(position-X_array.get(i)) < Math.abs(position-X_array.get(i+1))){
 				ValueIteration.current_position = i;
 			}else{
 				ValueIteration.current_position = i+1;
 			}
-		}
+		}*/
 		System.out.println(ValueIteration.current_position);
-		System.out.println(X_array.get(discretisation_position+1));
+		System.out.println(X_array.get(discretisation_position));
 	}
 	
 	public static void main(String[] args) {
 		init(32, 32, -1.2, -1.15, 0.6, 0.07, 0.99, 0.01);
 		set_X(32, -1.2);
-		set_current_position(0.4874999999999998);
+		set_current_position(0.54375);
 		//set_frequency_position(32, -1.2, 0.6);
 		//set_frequency_speed(32, 0.07);
 		//set_X(32, -1.2);
