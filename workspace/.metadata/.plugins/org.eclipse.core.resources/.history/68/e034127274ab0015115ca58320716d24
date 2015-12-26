@@ -111,6 +111,7 @@ public class ValueIteration {
 			}
 		}
 		System.out.println(ValueIteration.current_position);
+		System.out.println(X_array.get(discretisation_position+1));
 	}
 	
 	public static void main(String[] args) {

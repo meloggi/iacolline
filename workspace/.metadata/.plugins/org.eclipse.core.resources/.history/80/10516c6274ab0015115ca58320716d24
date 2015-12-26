@@ -111,10 +111,11 @@ public class ValueIteration {
 			}
 		}
 		System.out.println(ValueIteration.current_position);
+		System.out.println(X_array.get(discretisation_position+1));
 	}
 	
 	public static void main(String[] args) {
-		init(32, 32, -1.2, -1.15, 0.6, 0.07, 0.99, 0.01, 0, 0);
+		init(32, 32, -1.2, -1.15, 0.6, 0.07, 0.99, 0.01);
 		set_X(32, -1.2);
 		set_current_position(0.4874999999999998);
 		//set_frequency_position(32, -1.2, 0.6);
