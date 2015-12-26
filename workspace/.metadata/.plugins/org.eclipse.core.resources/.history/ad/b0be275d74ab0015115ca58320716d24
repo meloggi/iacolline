@@ -73,7 +73,7 @@ public class ValueIteration {
 		}
 	}
 	
-	public static void init(int discretisation_position, int discretisation_speed, double low_border, double ravine, double high_border, double limit_speed, double gamma, double epsilon, int current_position, int current_speed){
+	public static void init(int discretisation_position, int discretisation_speed, double low_border, double ravine, double high_border, double limit_speed, double gamma, double epsilon){
 		ValueIteration.gamma = gamma;
 		ValueIteration.epsilon = epsilon;
 		ValueIteration.discretisation_position = discretisation_position;
@@ -82,8 +82,6 @@ public class ValueIteration {
 		ValueIteration.limit_speed = limit_speed;
 		ValueIteration.high_border = high_border;
 		ValueIteration.low_border = low_border;
-		ValueIteration.current_position = current_position;
-		ValueIteration.current_speed = current_speed;
 		System.out.println("Gamma = "+ValueIteration.gamma);
 		System.out.println("Epsilon = "+ValueIteration.epsilon);
 		set_frequency_position(discretisation_position, low_border, high_border); 
@@ -111,10 +109,11 @@ public class ValueIteration {
 			}
 		}
 		System.out.println(ValueIteration.current_position);
+		System.out.println(X_array.get(discretisation_position+1));
 	}
 	
 	public static void main(String[] args) {
-		init(32, 32, -1.2, -1.15, 0.6, 0.07, 0.99, 0.01, 0, 0);
+		init(32, 32, -1.2, -1.15, 0.6, 0.07, 0.99, 0.01);
 		set_X(32, -1.2);
 		set_current_position(0.4874999999999998);
 		//set_frequency_position(32, -1.2, 0.6);
