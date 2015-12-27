@@ -19,7 +19,7 @@ public class ValueIteration {
 	static double frequency_speed;
 	static ArrayList<Double> X_array = new ArrayList<Double>();
 	static ArrayList<Double> speed_array = new ArrayList<Double>();
-	static ArrayList<Integer> reward = new ArrayList<Integer>();
+	static ArrayList<Double> reward = new ArrayList<Double>();
 	static int current_position;
 	static int current_speed;
 	
@@ -36,6 +36,13 @@ public class ValueIteration {
 		this.low_border = low_border;
 		this.reward_border = reward_border;
 	}
+	
+	
+	////////////////////////////////////////////////////////////////////////////////////
+	////////																	////////
+	////////							Initialisation							////////
+	////////																	////////
+	////////////////////////////////////////////////////////////////////////////////////
 	
 	public static void set_frequency_position(double discretisation_position, double low_border, double high_border){
 		frequency_position = (( Math.abs(high_border) + Math.abs(low_border)) / discretisation_position);
@@ -61,19 +68,22 @@ public class ValueIteration {
 		}
 	}
 	
-	public static void set_reward_init(int discretisation_position, double ravine){
+	public static void set_reward_init(int discretisation_position, double ravine, int current_speed){
 		for(int i = 0; i < discretisation_position; i++){
 			if(X_array.get(i) <= ravine){
-				reward.add(-1);
+				reward.add((double) -1);
+				System.out.println("Recompense pour "+i+", a pour valeur = "+reward.get(i));
+			}else if(X_array.get(i) >= reward_border){
+				reward.add(0.07-Math.abs(speed_array.get(current_speed)));
 				System.out.println("Recompense pour "+i+", a pour valeur = "+reward.get(i));
 			}else{
-				reward.add(0);
+				reward.add((double) 0);
 				System.out.println("Recompense pour "+i+", a pour valeur = "+reward.get(i));
 			}
 		}
 	}
 	
-	public static void init(int discretisation_position, int discretisation_speed, double low_border, double ravine, double high_border, double limit_speed, double gamma, double epsilon){
+	public static void init(int discretisation_position, int discretisation_speed, double low_border, double ravine, double reward_border,double high_border, double limit_speed, double gamma, double epsilon, int current_position, int current_speed, double height, double slope){
 		ValueIteration.gamma = gamma;
 		ValueIteration.epsilon = epsilon;
 		ValueIteration.discretisation_position = discretisation_position;
@@ -82,14 +92,26 @@ public class ValueIteration {
 		ValueIteration.limit_speed = limit_speed;
 		ValueIteration.high_border = high_border;
 		ValueIteration.low_border = low_border;
+		ValueIteration.current_position = current_position;
+		ValueIteration.current_speed = current_speed;
+		ValueIteration.height = height; 
+		ValueIteration.slope = slope;
+		ValueIteration.reward_border = reward_border;
 		System.out.println("Gamma = "+ValueIteration.gamma);
 		System.out.println("Epsilon = "+ValueIteration.epsilon);
 		set_frequency_position(discretisation_position, low_border, high_border); 
 		set_frequency_speed(discretisation_speed, limit_speed);
 		set_X(discretisation_position, low_border);
 		set_speed(discretisation_speed, limit_speed);
-		set_reward_init(discretisation_position, ravine);
+		set_reward_init(discretisation_position, ravine, current_speed);
 	}
+	
+	
+	////////////////////////////////////////////////////////////////////////////////////
+	////////																	////////
+	////////							Current									////////
+	////////																	////////
+	////////////////////////////////////////////////////////////////////////////////////
 	
 	public static void set_current_position(double position){
 		if(position >= X_array.get(discretisation_position-1)){
@@ -101,20 +123,52 @@ public class ValueIteration {
 			while (position >= X_array.get(i)){
 				i++;
 			}
-			if(Math.abs(position-X_array.get(i)) < Math.abs(position-X_array.get(i+1))){
+			i--;
+			if( (Math.abs(Math.abs(position)-Math.abs(X_array.get(i)))) < (Math.abs(Math.abs(position)-Math.abs(X_array.get(i+1)))) ){
 				ValueIteration.current_position = i;
 			}else{
 				ValueIteration.current_position = i+1;
 			}
 		}
 		System.out.println(ValueIteration.current_position);
-		System.out.println(X_array.get(discretisation_position+1));
+	}
+	
+	public static void set_current_speed(double speed){
+		if(speed >= speed_array.get(discretisation_speed-1)){
+			ValueIteration.current_speed = discretisation_speed-1;
+		}else if(speed <= speed_array.get(0)){
+			ValueIteration.current_speed = 0;
+		}else{
+			int i = 0;
+			while (speed >= speed_array.get(i)){
+				i++;
+			}
+			i--;
+			if( (Math.abs(Math.abs(speed)-Math.abs(speed_array.get(i)))) < (Math.abs(Math.abs(speed)-Math.abs(speed_array.get(i+1)))) ){
+				ValueIteration.current_speed = i;
+			}else{
+				ValueIteration.current_speed = i+1;
+			}
+		}
+		System.out.println(ValueIteration.current_speed);
+	}
+	
+	public static void set_current_reward(int discretisation_position, int current_speed){
+		for(int i = 0; i < discretisation_position; i++){
+			if(X_array.get(i) >= reward_border){
+				reward.set(i, 0.07-Math.abs(speed_array.get(current_speed)));
+				System.out.println("Recompense pour "+i+", a pour valeur = "+reward.get(i));
+			}
+		}
 	}
 	
 	public static void main(String[] args) {
-		init(32, 32, -1.2, -1.15, 0.6, 0.07, 0.99, 0.01);
-		set_X(32, -1.2);
-		set_current_position(0.43);
+		init(32, 32, -1.2, -1.15, 0.54, 0.6, 0.07, 0.99, 0.01, 0, 0, 0.0025, 3);
+		set_current_reward(32, 3);
+		//set_X(32, -1.2);
+		//set_current_position(0.4874999999999998);
+		//set_speed(32, 0.07);
+		//set_current_speed(0.06125);
 		//set_frequency_position(32, -1.2, 0.6);
 		//set_frequency_speed(32, 0.07);
 		//set_X(32, -1.2);
