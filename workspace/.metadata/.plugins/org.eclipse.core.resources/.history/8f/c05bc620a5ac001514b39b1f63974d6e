@@ -22,7 +22,7 @@ public class ValueIteration {
 	static ArrayList<Double> reward = new ArrayList<Double>();
 	static int current_position;
 	static int current_speed;
-	static int action = 1;
+	static int action = 0;
 	static double power;
 	
 	public ValueIteration(double gamma, double epsilon, int discretisation_position, int discretisation_speed, double height, double slope, double ravine, double limit_speed, double high_border, double low_border, double reward_border ){
@@ -176,7 +176,7 @@ public class ValueIteration {
 	
 	public static void main(String[] args) {
 		init(32, 32, -1.2, -1.15, 0.54, 0.6, 0.07, 0.99, 0.01, 0, 0, 0.0025, 3, 0.001);
-		for(int j = 0; j < 100000; j++){
+		for(int j = 0; j < 1000; j++){
 			speed_position_update();
 		}
 		//set_current_reward(32, 3);
