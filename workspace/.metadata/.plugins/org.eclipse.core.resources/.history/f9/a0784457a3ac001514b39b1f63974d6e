@@ -85,7 +85,7 @@ public class ValueIteration {
 		}
 	}
 	
-	public static void init(int discretisation_position, int discretisation_speed, double low_border, double ravine, double reward_border,double high_border, double limit_speed, double gamma, double epsilon, double current_position_value, double current_speed_value, double height, double slope, double power){
+	public static void init(int discretisation_position, int discretisation_speed, double low_border, double ravine, double reward_border,double high_border, double limit_speed, double gamma, double epsilon, int current_position, int current_speed, double height, double slope, double power){
 		ValueIteration.gamma = gamma;
 		ValueIteration.epsilon = epsilon;
 		ValueIteration.discretisation_position = discretisation_position;
@@ -94,6 +94,8 @@ public class ValueIteration {
 		ValueIteration.limit_speed = limit_speed;
 		ValueIteration.high_border = high_border;
 		ValueIteration.low_border = low_border;
+		ValueIteration.current_position = current_position;
+		ValueIteration.current_speed = current_speed;
 		ValueIteration.height = height; 
 		ValueIteration.slope = slope;
 		ValueIteration.power = power;
@@ -104,8 +106,6 @@ public class ValueIteration {
 		set_frequency_speed(discretisation_speed, limit_speed);
 		set_X(discretisation_position, low_border);
 		set_speed(discretisation_speed, limit_speed);
-		set_current_position(current_position_value);
-		set_current_speed(current_speed_value);
 		set_reward_init(discretisation_position, ravine, current_speed);
 	}
 	
@@ -175,7 +175,7 @@ public class ValueIteration {
 	}
 	
 	public static void main(String[] args) {
-		init(32, 32, -1.2, -1.15, 0.54, 0.6, 0.07, 0.99, 0.01, 0, 0, 0.0025, 3, 0.001);
+		init(32, 32, -1.2, -1.15, 0.54, 0.6, 0.07, 0.99, 0.01, 21, 16, 0.0025, 3, 0.001);
 		speed_position_update();
 		speed_position_update();
 		speed_position_update();
