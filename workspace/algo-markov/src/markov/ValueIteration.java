@@ -22,7 +22,7 @@ public class ValueIteration {
 	static ArrayList<Double> reward = new ArrayList<Double>();
 	static int current_position;
 	static int current_speed;
-	static int action = 1;
+	static int action=0;
 	static double power;
 	
 	public ValueIteration(double gamma, double epsilon, int discretisation_position, int discretisation_speed, double height, double slope, double ravine, double limit_speed, double high_border, double low_border, double reward_border ){
@@ -70,13 +70,13 @@ public class ValueIteration {
 		}
 	}
 	
-	public static void set_reward_init(int discretisation_position, double ravine, int current_speed){
+	public static void set_reward_init(int discretisation_position, double limit_speed, double ravine, int current_speed){
 		for(int i = 0; i < discretisation_position; i++){
 			if(X_array.get(i) <= ravine){
 				reward.add((double) -1);
 				System.out.println("Recompense pour "+i+", a pour valeur = "+reward.get(i));
 			}else if(X_array.get(i) >= reward_border){
-				reward.add(0.07-Math.abs(speed_array.get(current_speed)));
+				reward.add(limit_speed-Math.abs(speed_array.get(current_speed)));
 				System.out.println("Recompense pour "+i+", a pour valeur = "+reward.get(i));
 			}else{
 				reward.add((double) 0);
@@ -106,7 +106,7 @@ public class ValueIteration {
 		set_speed(discretisation_speed, limit_speed);
 		set_current_position(current_position_value);
 		set_current_speed(current_speed_value);
-		set_reward_init(discretisation_position, ravine, current_speed);
+		set_reward_init(discretisation_position, limit_speed, ravine, current_speed);
 	}
 	
 	
@@ -126,11 +126,10 @@ public class ValueIteration {
 			while (position >= X_array.get(i)){
 				i++;
 			}
-			i--;
-			if( (Math.abs(Math.abs(position)-Math.abs(X_array.get(i)))) < (Math.abs(Math.abs(position)-Math.abs(X_array.get(i+1)))) ){
-				ValueIteration.current_position = i;
+			if( (Math.abs(Math.abs(position)-Math.abs(X_array.get(i-1)))) < (Math.abs(Math.abs(position)-Math.abs(X_array.get(i)))) ){
+				ValueIteration.current_position = i-1;
 			}else{
-				ValueIteration.current_position = i+1;
+				ValueIteration.current_position = i;
 			}
 		}
 	}
@@ -145,11 +144,10 @@ public class ValueIteration {
 			while (speed >= speed_array.get(i)){
 				i++;
 			}
-			i--;
-			if( (Math.abs(Math.abs(speed)-Math.abs(speed_array.get(i)))) < (Math.abs(Math.abs(speed)-Math.abs(speed_array.get(i+1)))) ){
-				ValueIteration.current_speed = i;
+			if( (Math.abs(Math.abs(speed)-Math.abs(speed_array.get(i-1)))) < (Math.abs(Math.abs(speed)-Math.abs(speed_array.get(i)))) ){
+				ValueIteration.current_speed = i-1;
 			}else{
-				ValueIteration.current_speed = i+1;
+				ValueIteration.current_speed = i;
 			}
 		}
 	}
@@ -157,7 +155,7 @@ public class ValueIteration {
 	public static void set_current_reward(){
 		for(int i = 0; i < discretisation_position; i++){
 			if(X_array.get(i) >= reward_border){
-				reward.set(i, 0.07-Math.abs(speed_array.get(current_speed)));
+				reward.set(i, limit_speed-Math.abs(speed_array.get(current_speed)));
 				System.out.println("Recompense pour "+i+", a pour valeur = "+reward.get(i));
 			}
 		}
@@ -176,7 +174,7 @@ public class ValueIteration {
 	
 	public static void main(String[] args) {
 		init(32, 32, -1.2, -1.15, 0.54, 0.6, 0.07, 0.99, 0.01, 0, 0, 0.0025, 3, 0.001);
-		for(int j = 0; j < 100000; j++){
+		for(int j = 0; j < 100; j++){
 			speed_position_update();
 		}
 		//set_current_reward(32, 3);
