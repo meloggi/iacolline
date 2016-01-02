@@ -67,11 +67,11 @@ public class Algorithm {
 		//Action forward
 		double calculate_speed_forward = ValueIteration.speed_array.get(get_speed_from_index(i)) + ValueIteration.power * 1 - ValueIteration.height * Math.cos(ValueIteration.slope * ValueIteration.X_array.get(get_position_from_index(i)));
 		int sizef = Value.get(get_index_value(get_array_speed(calculate_speed_forward),get_array_position(calculate_position))).ValueT.size();
-		double value_forward = reward + gamma * Value.get(get_index_value(get_array_speed(calculate_speed_forward),get_array_position(calculate_position))).ValueT.get(sizef); 
+		double value_forward = reward + gamma * Value.get(get_index_value(get_array_speed(calculate_speed_forward),get_array_position(calculate_position))).ValueT.get(sizef-1); 
 		//Action backward
 		double calculate_speed_backward = ValueIteration.speed_array.get(get_speed_from_index(i)) + ValueIteration.power * (-1) - ValueIteration.height * Math.cos(ValueIteration.slope * ValueIteration.X_array.get(get_position_from_index(i)));
 		int sizeb = Value.get(get_index_value(get_array_speed(calculate_speed_backward),get_array_position(calculate_position))).ValueT.size();
-		double value_backward = reward + gamma * Value.get(get_index_value(get_array_speed(calculate_speed_backward),get_array_position(calculate_position))).ValueT.get(sizeb); 
+		double value_backward = reward + gamma * Value.get(get_index_value(get_array_speed(calculate_speed_backward),get_array_position(calculate_position))).ValueT.get(sizeb-1); 
 		
 		double new_value = Math.max(value_forward,value_backward) ;
 		Value.get(i).ValueT.add(new_value);
@@ -91,6 +91,7 @@ public class Algorithm {
 			t--;
 			while(Math.abs(Value.get(i).ValueT.get(t+1)-Value.get(i).ValueT.get(t))>=epsilon*(1-gamma)/(2*gamma)){
 				value_calculate(i);
+				t++;
 			}
 		}
 	}
