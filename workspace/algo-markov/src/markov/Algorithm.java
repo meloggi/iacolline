@@ -60,7 +60,7 @@ public class Algorithm {
 		return index;
 	}
 	
-	public static void value_calculate(int i){
+	public static int value_calculate(int i){ // return the value of action 1 or -1
 		double calculate_position = ValueIteration.X_array.get(get_position_from_index(i)) + ValueIteration.speed_array.get(get_speed_from_index(i));
 		ValueIteration.set_current_reward();	//Ici à modifier pas bon car ici on n'affecte pas les currents
 		double reward = ValueIteration.reward.get(get_array_position(calculate_position));
@@ -75,12 +75,13 @@ public class Algorithm {
 		
 		double new_value = Math.max(value_forward,value_backward) ;
 		Value.get(i).ValueT.add(new_value);
+		if(value_forward > value_backward) return 1;
+		else return -1;
 	}
 	
 	public static void creation_values(){
 		for(int i = 0; i<ValueIteration.discretisation_position*ValueIteration.discretisation_speed;i++){
 			Value.add(new ValueClass(i));
-			Value.get(i).ValueT.clear();
 			Value.get(i).ValueT.add((double) 0);
 		}
 	}
@@ -89,9 +90,20 @@ public class Algorithm {
 		for(int i = 0; i<ValueIteration.discretisation_position*ValueIteration.discretisation_speed;i++){
 			int t = Value.get(i).ValueT.size();
 			t--;
+			int a=0;
+			System.out.println("ok");
 			while(Math.abs(Value.get(i).ValueT.get(t+1)-Value.get(i).ValueT.get(t))>=epsilon*(1-gamma)/(2*gamma)){
-				value_calculate(i);
+				a=value_calculate(i);
 				t++;
+			}
+			if(a==1){
+				Value.get(i).setQvalue_forward(Value.get(i).ValueT.get(t-1));		// Qvalue initialized
+				Value.get(i).setQvalue_backward(Value.get(i).ValueT.get(t-1)-1);	// just to compare both values and to get the correct max value
+				Value.get(i).setOptimalAction();									// optimal action set
+			}else{
+				Value.get(i).setQvalue_backward(Value.get(i).ValueT.get(t-1));
+				Value.get(i).setQvalue_forward(Value.get(i).ValueT.get(t-1)-1);
+				Value.get(i).setOptimalAction();
 			}
 		}
 	}
@@ -100,6 +112,9 @@ public class Algorithm {
 		creation_values();
 		convergence();
 		
+		for(int i = 0; i<ValueIteration.discretisation_position*ValueIteration.discretisation_speed;i++){
+			System.out.println("State" + i + "Action "+ Value.get(i).action);
+		}
 		
 		/*
 		//loop on every state

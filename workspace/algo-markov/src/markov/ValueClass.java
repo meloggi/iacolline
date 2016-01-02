@@ -8,6 +8,7 @@ public class ValueClass {
 	public ArrayList<Double> ValueT;  // ArrayList of values at T moments
 	public double Qvalue_forward;
 	public double Qvalue_backward;
+	public int action;
 	
 	
 	public ValueClass(int state){
@@ -28,6 +29,13 @@ public class ValueClass {
 		this.Qvalue_backward=value;
 	}
 		
+	public void setOptimalAction(){
+		if (Qvalue_forward>Qvalue_backward){
+			this.action = 1;
+		}else{
+			this.action = -1;
+		}
+	}
 	
 /*	public ValueClass(int state, int t, double Value){
 		this.state=state;
