@@ -56,6 +56,8 @@ public class Interface {
 	private JFormattedTextField formattedTextField_11;
 	private JPanel panel_simulation;
 	private JTabbedPane tabbedPane;
+	
+	private Graphique graph;
 
 	/**
 	 * Launch the application.
@@ -103,6 +105,10 @@ public class Interface {
 		formattedTextField = new JFormattedTextField();
 		formattedTextField.setText("0,6");
 		panel_modele.add(formattedTextField, "cell 1 0,growx");
+		
+		JPanel panel_graph = new JPanel();
+		panel_graph.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		panel_modele.add(panel_graph, "cell 3 0 1 18,grow");
 		
 		lblBordureBas = new JLabel("Bordure bas");
 		panel_modele.add(lblBordureBas, "cell 0 1,alignx left");
@@ -181,5 +187,7 @@ public class Interface {
 		
 		panel_simulation = new JPanel();
 		tabbedPane.addTab("Simulation", null, panel_simulation, null);
+		
+		panel_graph.add(Graphique.Graphique());
 	}
 }
