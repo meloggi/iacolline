@@ -130,9 +130,7 @@ public class Algorithm {
 		creation_values();
 		convergence();
 		set_action();
-		while(ValueIteration.current_position != 32){
-			ValueIteration.speed_position_update();
-		}
+		//while(ValueIteration.current_position!=)
 		
 		for(int i = 0; i<ValueIteration.discretisation_position*ValueIteration.discretisation_speed;i++){
 			System.out.println("State" + i + "Action "+ Value.get(i).action);

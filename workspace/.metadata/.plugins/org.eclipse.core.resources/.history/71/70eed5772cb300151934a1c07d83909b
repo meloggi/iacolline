@@ -22,6 +22,7 @@ public class ValueIteration {
 	static ArrayList<Double> reward = new ArrayList<Double>();
 	static int current_position;
 	static int current_speed;
+	static int action = 0;
 	static double power;
 	
 /*	public ValueIteration(double gamma, double epsilon, int discretisation_position, int discretisation_speed, double height, double slope, double ravine, double limit_speed, double high_border, double low_border, double reward_border ){
@@ -164,14 +165,14 @@ public class ValueIteration {
 		System.out.println("Position précédente: "+current_position);
 		System.out.println("Vitesse précédente: "+current_speed);
 		double calculate_position = X_array.get(current_position) + speed_array.get(current_speed);
-		double calculate_speed = speed_array.get(current_speed) + power * Algorithm.Action.get(Algorithm.get_index_value(current_speed, current_position)) - height * Math.cos(slope * X_array.get(current_position));
+		double calculate_speed = speed_array.get(current_speed) + power * action - height * Math.cos(slope * X_array.get(current_position));
 		set_current_speed(calculate_speed);
 		set_current_position(calculate_position);
 		System.out.println("Position actualisée: "+current_position);
 		System.out.println("Vitesse actualisée: "+current_speed);
 	}
 	
-	/*public static void main(String[] args) {
+	public static void main(String[] args) {
 		init(32, 32, -1.2, -1.15, 0.54, 0.6, 0.07, 0.99, 0.01, 0, 0, 0.0025, 3, 0.001);
 		for(int j = 0; j < 100; j++){
 			speed_position_update();
@@ -186,5 +187,5 @@ public class ValueIteration {
 		//set_X(32, -1.2);
 		//set_speed(32, 0.07);
 		//set_reward_init(32, -1.15);
-	}*/
+	}
 }
