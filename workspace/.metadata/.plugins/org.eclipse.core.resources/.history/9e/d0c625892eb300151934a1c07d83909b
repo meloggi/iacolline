@@ -18,7 +18,7 @@ public class Algorithm {
 	}
 	
 	public static int get_position_from_index(int index){
-		return (index- ((index/ValueIteration.discretisation_position) * ValueIteration.discretisation_position));
+		return (index-(index*ValueIteration.discretisation_position));
 	}
 	
 	public static int get_array_position(double position){
@@ -83,9 +83,10 @@ public class Algorithm {
 		double calculate_speed_backward = ValueIteration.speed_array.get(get_speed_from_index(i)) + ValueIteration.power * (-1) - ValueIteration.height * Math.cos(ValueIteration.slope * ValueIteration.X_array.get(get_position_from_index(i)));
 		int sizeb = Value.get(get_index_value(get_array_speed(calculate_speed_backward),get_array_position(calculate_position))).ValueT.size();
 		double value_backward = reward(calculate_position, calculate_speed_backward) + gamma * Value.get(get_index_value(get_array_speed(calculate_speed_backward),get_array_position(calculate_position))).ValueT.get(sizeb-1); 
+		
 		double new_value = Math.max(value_forward,value_backward) ;
 		Value.get(i).ValueT.add(new_value);
-		if(value_forward >= value_backward) return 1;
+		if(value_forward > value_backward) return 1;
 		else return -1;
 	}
 	
@@ -98,28 +99,23 @@ public class Algorithm {
 	
 	public static void convergence(){
 		for(int i = 0; i<ValueIteration.discretisation_position*ValueIteration.discretisation_speed;i++){
-			value_calculate(i);
 			int t = Value.get(i).ValueT.size();
 			t--;
-			int a=1;
-			while(Math.abs(Value.get(i).ValueT.get(t)-Value.get(i).ValueT.get(t-1))>=epsilon*(1-gamma)/(2*gamma)){
-				value_calculate(i);
+			int a=0;
+			System.out.println("ok");
+			while(Math.abs(Value.get(i).ValueT.get(t+1)-Value.get(i).ValueT.get(t))>=epsilon*(1-gamma)/(2*gamma)){
+				a=value_calculate(i);
 				t++;
 			}
-			a = value_calculate(i);
-			Value.get(i).action = a;
-			/*if(a==1){
-				System.out.println("komel");
-				Value.get(i).setQvalue_forward(Value.get(i).ValueT.get(t));		// Qvalue initialized
-				//Value.get(i).setQvalue_backward(Value.get(i).ValueT.get(t));	// just to compare both values and to get the correct max value
-				System.out.println("dzhfiudbfh= "+Value.get(i).ValueT.get(t));
+			if(a==1){
+				Value.get(i).setQvalue_forward(Value.get(i).ValueT.get(t-1));		// Qvalue initialized
+				Value.get(i).setQvalue_backward(Value.get(i).ValueT.get(t-1)-1);	// just to compare both values and to get the correct max value
 				Value.get(i).setOptimalAction();									// optimal action set
 			}else{
-				Value.get(i).setQvalue_backward(Value.get(i).ValueT.get(t));
-				System.out.println("vvvvvvvvv= "+Value.get(i).ValueT.get(t));
-				//Value.get(i).setQvalue_forward(Value.get(i).ValueT.get(t));
+				Value.get(i).setQvalue_backward(Value.get(i).ValueT.get(t-1));
+				Value.get(i).setQvalue_forward(Value.get(i).ValueT.get(t-1)-1);
 				Value.get(i).setOptimalAction();
-			}*/
+			}
 		}
 	}
 	
@@ -134,20 +130,12 @@ public class Algorithm {
 		creation_values();
 		convergence();
 		set_action();
+		//while(ValueIteration.current_position!=)
 		
-		/*for(int i = 0; i<ValueIteration.discretisation_position*ValueIteration.discretisation_speed;i++){
-			//System.out.println("State" + i + "Action "+ Value.get(i).action);
-		}*/
-		int t = 0;
-		while(ValueIteration.current_position != 31 ){
-			if (ValueIteration.X_array.get(ValueIteration.current_position) <= ValueIteration.ravine){
-				System.out.println("You're dead game over!!!!!!");
-				break;
-			}
-			ValueIteration.speed_position_update();
-			t++;
+		for(int i = 0; i<ValueIteration.discretisation_position*ValueIteration.discretisation_speed;i++){
+			System.out.println("State" + i + "Action "+ Value.get(i).action);
 		}
-		System.out.println("Nombre d'itération = "+t);
+		
 		/*
 		//loop on every state
 		for(int i = 0; i<ValueIteration.discretisation_position*ValueIteration.discretisation_speed;i++){

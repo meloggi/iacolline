@@ -46,12 +46,12 @@ public class ValueIteration {
 	////////////////////////////////////////////////////////////////////////////////////
 	
 	public static void set_frequency_position(double discretisation_position, double low_border, double high_border){
-		frequency_position = (( Math.abs(high_border) + Math.abs(low_border)) / (discretisation_position-1));
+		frequency_position = (( Math.abs(high_border) + Math.abs(low_border)) / discretisation_position);
 		System.out.println("Valeur du pas de la position = "+frequency_position);
 	}
 	
 	public static void set_frequency_speed(double discretisation_speed, double limit_speed){
-		frequency_speed = ( ( 2 * Math.abs(limit_speed) ) / (discretisation_speed-1) ); 
+		frequency_speed = ( ( 2 * Math.abs(limit_speed) ) / discretisation_speed ); 
 		System.out.println("Valeur du pas de la vitesse = "+frequency_speed);
 	}
 	
@@ -164,14 +164,14 @@ public class ValueIteration {
 		System.out.println("Position précédente: "+current_position);
 		System.out.println("Vitesse précédente: "+current_speed);
 		double calculate_position = X_array.get(current_position) + speed_array.get(current_speed);
-		double calculate_speed = speed_array.get(current_speed) + power * Algorithm.Action.get(Algorithm.get_index_value(current_speed, current_position)) - height * Math.cos(slope * X_array.get(current_position));
+		double calculate_speed = speed_array.get(current_speed) + power * Algorithm.Action.get(Algorithm.get_index_value(speed_array.get(current_speed), X_array.get(current_position))) - height * Math.cos(slope * X_array.get(current_position));
 		set_current_speed(calculate_speed);
 		set_current_position(calculate_position);
 		System.out.println("Position actualisée: "+current_position);
 		System.out.println("Vitesse actualisée: "+current_speed);
 	}
 	
-	/*public static void main(String[] args) {
+	public static void main(String[] args) {
 		init(32, 32, -1.2, -1.15, 0.54, 0.6, 0.07, 0.99, 0.01, 0, 0, 0.0025, 3, 0.001);
 		for(int j = 0; j < 100; j++){
 			speed_position_update();
@@ -186,5 +186,5 @@ public class ValueIteration {
 		//set_X(32, -1.2);
 		//set_speed(32, 0.07);
 		//set_reward_init(32, -1.15);
-	}*/
+	}
 }
