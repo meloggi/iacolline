@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="11" version="2.0">
+<workbench progressCount="19" version="2.0">
 <workbenchAdvisor/>
 <window height="848" maximized="true" width="768" x="65" y="24">
 <fastViewData fastViewLocation="1024"/>
@@ -30,32 +30,17 @@
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
 <part id="1"/>
-<part id="2"/>
-<part id="3"/>
-<part id="4"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Algorithm.java" partName="Algorithm.java" path="/home/komel/Bureau/iacolline/workspace/algo-markov/src/markov/Algorithm.java" title="Algorithm.java" tooltip="algo-markov/src/markov/Algorithm.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/algo-markov/src/markov/Algorithm.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="5298" selectionTopPixel="0"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ValueClass.java" partName="ValueClass.java" path="/home/komel/Bureau/iacolline/workspace/algo-markov/src/markov/ValueClass.java" title="ValueClass.java" tooltip="algo-markov/src/markov/ValueClass.java" workbook="DefaultEditorWorkbook">
+<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ValueClass.java" partName="ValueClass.java" path="/home/komel/Bureau/iacolline/workspace/algo-markov/src/markov/ValueClass.java" title="ValueClass.java" tooltip="algo-markov/src/markov/ValueClass.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/algo-markov/src/markov/ValueClass.java"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ValueIteration.java" partName="ValueIteration.java" path="/home/komel/Bureau/iacolline/workspace/algo-markov/src/markov/ValueIteration.java" title="ValueIteration.java" tooltip="algo-markov/src/markov/ValueIteration.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/algo-markov/src/markov/ValueIteration.java"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="6294" selectionTopPixel="1383"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Interface.java" partName="Interface.java" path="/home/komel/Bureau/iacolline/workspace/algo-markov/src/markov/Interface.java" title="Interface.java" tooltip="algo-markov/src/markov/Interface.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/algo-markov/src/markov/Interface.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
-</editor>
-<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Graphique.java" partName="Graphique.java" path="/home/komel/Bureau/iacolline/workspace/algo-markov/src/markov/Graphique.java" title="Graphique.java" tooltip="algo-markov/src/markov/Graphique.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/algo-markov/src/markov/Graphique.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
 </editor>
 </editors>
 <views>
@@ -67,7 +52,7 @@
 <expanded>
 <category IMemento.internal.id="Errors (2 items)"/>
 </expanded>
-<columnWidths org.eclipse.ui.ide.locationField="105" org.eclipse.ui.ide.markerType="398" org.eclipse.ui.ide.pathField="140" org.eclipse.ui.ide.resourceField="105" org.eclipse.ui.ide.severityAndDescriptionField="521"/>
+<columnWidths org.eclipse.ui.ide.locationField="105" org.eclipse.ui.ide.markerType="398" org.eclipse.ui.ide.pathField="140" org.eclipse.ui.ide.resourceField="105" org.eclipse.ui.ide.severityAndDescriptionField="851"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.resourceField"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.pathField"/>
@@ -94,7 +79,7 @@
 <viewState/>
 </view>
 </views>
-<perspectives activePart="org.eclipse.jdt.ui.CompilationUnitEditor" activePerspective="org.eclipse.ui.resourcePerspective">
+<perspectives activePart="org.eclipse.ui.navigator.ProjectExplorer" activePerspective="org.eclipse.ui.resourcePerspective">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="org.eclipse.ui.internal.ide.application.ResourcePerspective" id="org.eclipse.ui.resourcePerspective" label="Resource"/>
 <alwaysOnActionSet id="org.eclipse.ui.cheatsheets.actionSet"/>
@@ -187,22 +172,11 @@
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/algo-markov/src/markov/ValueIteration.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/algo-markov/src/markov/Interface.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/algo-markov/src/markov/Graphique.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/algo-markov/src/markov/Interface.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/algo-markov/src/markov/Graphique.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/algo-markov/src/markov/Algorithm.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/algo-markov/src/markov/ValueClass.java"/>
 </editors>
-<item historyLabel="Algorithm.java" index="0">
-<position info="not_deleted" x="5146" y="0"/>
-</item>
-<item historyLabel="Algorithm.java" index="0">
-<position info="not_deleted" x="5148" y="0"/>
-</item>
-<item historyLabel="Algorithm.java" index="0">
-<position info="not_deleted" x="5447" y="0"/>
-</item>
-<item historyLabel="ValueIteration.java" index="2">
-<position info="not_deleted" x="411" y="0"/>
-</item>
-<item historyLabel="Algorithm.java" index="0">
-<position info="not_deleted" x="5447" y="0"/>
-</item>
 <item historyLabel="ValueIteration.java" index="2">
 <position info="not_deleted" x="6796" y="0"/>
 </item>
@@ -335,8 +309,23 @@
 <item historyLabel="Interface.java" index="3">
 <position info="not_deleted" x="2390" y="0"/>
 </item>
-<item active="true" historyLabel="Graphique.java" index="4">
+<item historyLabel="Graphique.java" index="4">
 <position info="not_deleted" x="1593" y="0"/>
+</item>
+<item historyLabel="Interface.java" index="5">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="Graphique.java" index="6">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="Interface.java" index="5">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="Algorithm.java" index="7">
+<position info="not_deleted" x="5298" y="0"/>
+</item>
+<item active="true" historyLabel="ValueClass.java" index="8">
+<position info="not_deleted" x="0" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -344,10 +333,6 @@
 <workbenchWindowAdvisor/>
 <actionBarAdvisor/>
 <trimLayout>
-<trimArea IMemento.internal.id="16384">
-<trimItem IMemento.internal.id="topLeft"/>
-<trimItem IMemento.internal.id="bottomLeft"/>
-</trimArea>
 <trimArea IMemento.internal.id="128">
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.WorkbenchWindow.topBar"/>
 </trimArea>
@@ -355,7 +340,6 @@
 <trimItem IMemento.internal.id="org.eclise.ui.internal.FastViewBar"/>
 <trimItem IMemento.internal.id="org.eclipse.jface.action.StatusLineManager"/>
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.progress.ProgressRegion"/>
-<trimItem IMemento.internal.id="bottomRight"/>
 </trimArea>
 </trimLayout>
 </window>

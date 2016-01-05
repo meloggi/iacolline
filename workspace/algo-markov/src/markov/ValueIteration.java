@@ -46,12 +46,12 @@ public class ValueIteration {
 	////////////////////////////////////////////////////////////////////////////////////
 	
 	public static void set_frequency_position(double discretisation_position, double low_border, double high_border){
-		frequency_position = (( Math.abs(high_border) + Math.abs(low_border)) / discretisation_position);
+		frequency_position = (( Math.abs(high_border) + Math.abs(low_border)) / (discretisation_position-1));
 		System.out.println("Valeur du pas de la position = "+frequency_position);
 	}
 	
 	public static void set_frequency_speed(double discretisation_speed, double limit_speed){
-		frequency_speed = ( ( 2 * Math.abs(limit_speed) ) / discretisation_speed ); 
+		frequency_speed = ( ( 2 * Math.abs(limit_speed) ) / (discretisation_speed-1) ); 
 		System.out.println("Valeur du pas de la vitesse = "+frequency_speed);
 	}
 	
