@@ -25,6 +25,9 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.JFormattedTextField;
 import java.awt.Label;
 import java.awt.Button;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import java.awt.GridLayout;
 
 public class Interface {
 
@@ -87,13 +90,11 @@ public class Interface {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 1194, 672);
+		frame.setBounds(100, 100, 1232, 699);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frame.getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
 		
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(0, 0, 1172, 616);
-		frame.getContentPane().add(tabbedPane);
 		
 		panel_modele = new JPanel();
 		tabbedPane.addTab("Modele", null, panel_modele, null);
@@ -188,6 +189,14 @@ public class Interface {
 		panel_simulation = new JPanel();
 		tabbedPane.addTab("Simulation", null, panel_simulation, null);
 		
-		panel_graph.add(Graphique.Graphique());
+		//panel_graph.add(Graphique.Graphique());
+		double[] data = new double[10];
+		for(int i =0;i<data.length;i++)
+		{
+			data[i]=i;
+		}
+		
+		panel_graph.add(Graphique.createChart(data));
+		frame.getContentPane().add(tabbedPane);
 	}
 }

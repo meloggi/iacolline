@@ -130,7 +130,7 @@ public class Algorithm {
 	}
 	
 	public static void main(String args[]){
-		ValueIteration.init(32, 32, -1.2, -1.15, 0.54, 0.6, 0.07, 0.99, 0.01, 0, 0, 0.0025, 3, 0.001);
+		ValueIteration.init(100, 100, -1.2, -1.15, 0.54, 0.6, 0.07, 0.99, 0.01, 0, 0, 0.0025, 3, 0.001);
 		creation_values();
 		convergence();
 		set_action();
@@ -139,7 +139,7 @@ public class Algorithm {
 			//System.out.println("State" + i + "Action "+ Value.get(i).action);
 		}*/
 		int t = 0;
-		while(ValueIteration.current_position != 31 ){
+		while(ValueIteration.current_position != 99 ){
 			if (ValueIteration.X_array.get(ValueIteration.current_position) <= ValueIteration.ravine){
 				System.out.println("You're dead game over!!!!!!");
 				break;
