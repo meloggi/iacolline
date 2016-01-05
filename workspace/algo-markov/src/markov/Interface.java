@@ -34,6 +34,9 @@ import java.awt.GridLayout;
 import javax.swing.BoxLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.FlowLayout;
+import java.awt.CardLayout;
+import java.awt.GridBagLayout;
 
 public class Interface {
 
@@ -70,6 +73,9 @@ public class Interface {
 	
 	public double[] data;
 	final XYSeries series1 = new XYSeries("Simulation");
+	final XYSeries seriesVitesse = new XYSeries("Vitesse");
+	final XYSeries seriesPosition = new XYSeries("Position");
+	private JScrollPane scrollPane;
 
 	/**
 	 * Launch the application.
@@ -102,15 +108,14 @@ public class Interface {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 1232, 699);
+	//	frame.setBounds(100, 100, 1232, 699);
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-
-		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.X_AXIS));
+		frame.getContentPane().setLayout(new MigLayout("", "[334.00px][771.00px,grow,right]", "[643px,grow]"));
 		
 		panel_modele = new JPanel();
-		frame.getContentPane().add(panel_modele);
-		panel_modele.setLayout(new MigLayout("", "[left][:229.00:100px,grow][47.00][grow,right]", "[][top][top][top][top][top][top][top][top][top][top][top][top][top][top][top][top][top]"));
+		frame.getContentPane().add(panel_modele, "cell 0 0,alignx left,aligny top");
+		panel_modele.setLayout(new MigLayout("", "[left][:229.00:100px,grow][47.00]", "[][top][top][top][top][top][top][top][top][top][top][top][top][top][top][top][top][top]"));
 		
 		lblNewLabel = new JLabel("Bordure haut");
 		panel_modele.add(lblNewLabel, "cell 0 0,alignx left,aligny top");
@@ -212,6 +217,8 @@ public class Interface {
 					}
 					ValueIteration.speed_position_update();
 					series1.add(ValueIteration.X_array.get(ValueIteration.current_position),ValueIteration.speed_array.get(ValueIteration.current_speed));
+					seriesPosition.add(t,ValueIteration.X_array.get(ValueIteration.current_position));
+					seriesVitesse.add(t,ValueIteration.speed_array.get(ValueIteration.current_speed));
 					t++;
 					
 				}
@@ -219,17 +226,23 @@ public class Interface {
 				
 				panel_graph.removeAll();
 				panel_graph.add(Graphique.createChart(series1));
+				panel_graph.add(Graphique.createChart(seriesPosition));
+				panel_graph.add(Graphique.createChart(seriesVitesse));
 				frame.pack();
 				
 			}
 		});
 		panel_modele.add(btnLancerSimulation, "cell 0 17");
 		
+		scrollPane = new JScrollPane();
+		frame.getContentPane().add(scrollPane, "cell 1 0,grow");
+		
 		panel_graph = new JPanel();
+		scrollPane.setViewportView(panel_graph);
 		panel_graph.setAlignmentY(Component.TOP_ALIGNMENT);
 		panel_graph.setAlignmentX(Component.RIGHT_ALIGNMENT);
-		frame.getContentPane().add(panel_graph);
 		panel_graph.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		panel_graph.setLayout(new GridLayout(3, 1));
 		
 		
 		

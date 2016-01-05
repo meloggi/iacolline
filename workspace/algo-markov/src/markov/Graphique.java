@@ -1,5 +1,7 @@
 package markov;
 
+import java.awt.Component;
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -43,6 +45,24 @@ public class Graphique {
 				dts, 
 				PlotOrientation.VERTICAL, 
 				false, 
+				true,
+				false
+		);
+		return  new ChartPanel(jfc);
+	}
+
+	public static Component createChart(XYSeries seriesPosition, XYSeries seriesVitesse)
+	{
+		XYSeriesCollection dts = new XYSeriesCollection();
+		dts.addSeries(seriesPosition);
+		dts.addSeries(seriesVitesse);
+		JFreeChart jfc = ChartFactory.createXYLineChart(
+				"Simulation",
+				"Position",
+				"Vitesse", 
+				dts, 
+				PlotOrientation.VERTICAL, 
+				true, 
 				true,
 				false
 		);
