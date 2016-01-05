@@ -130,16 +130,16 @@ public class Algorithm {
 	}
 	
 	public static void main(String args[]){
-		ValueIteration.init(32, 32, -1.2, -1.15, 0.54, 0.6, 0.07, 0.99, 0.01, 0, 0, 0.0025, 3, 0.001);
+/*		ValueIteration.init(100, 100, -1.2, -1.15, 0.54, 0.6, 0.07, 0.99, 0.01, 0, 0, 0.0025, 3, 0.001);
 		creation_values();
 		convergence();
-		set_action();
+		set_action();*/
 		
-		/*for(int i = 0; i<ValueIteration.discretisation_position*ValueIteration.discretisation_speed;i++){
-			//System.out.println("State" + i + "Action "+ Value.get(i).action);
-		}*/
-		int t = 0;
-		while(ValueIteration.current_position != 31 ){
+		
+		Interface window = new Interface();
+		
+	/*	int t = 0;
+		while(ValueIteration.current_position != 99 ){
 			if (ValueIteration.X_array.get(ValueIteration.current_position) <= ValueIteration.ravine){
 				System.out.println("You're dead game over!!!!!!");
 				break;
@@ -148,26 +148,9 @@ public class Algorithm {
 			t++;
 		}
 		System.out.println("Nombre d'itération = "+t);
-		/*
-		//loop on every state
-		for(int i = 0; i<ValueIteration.discretisation_position*ValueIteration.discretisation_speed;i++){
-			int t = 0;
-			
-			Value.get(i).ValueT.add(Math.max(0.0, 0.0)); // first value for moving forward, second for moving backward
-			
-			//loop of stage 3, page37, MDP course
-			while(Math.abs(Value.get(i).ValueT.get(t+1)-Value.get(i).ValueT.get(t))>=epsilon*(1-gamma)/(2*gamma)){  
-				t++;
-				Value.get(i).ValueT.add(Math.max(0.0, 0.0));  // new value for t to satisfy the ValueIteration inequality
-				//index should be correct (no unbound exception thrown)
-			}
-			
-			Value.get(i).setQvalue_forward(reward + gamma*Value.get(i).ValueT.get(t));		// Qvalue moving forward
-			Value.get(i).setQvalue_backward(reward + gamma*Value.get(i).ValueT.get(t)); // Qvalue moving backward
-			
-			// missing optimal policy
-		}*/
+		*/
 		
+
 	}
 
 }
