@@ -7,6 +7,9 @@ import javax.swing.JButton;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
+
+import org.jfree.data.xy.XYSeries;
+
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
@@ -28,44 +31,50 @@ import java.awt.Button;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import java.awt.GridLayout;
+import javax.swing.BoxLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Interface {
 
-	private JFrame frame;
-	private JPanel panel_modele;
-	private JLabel lblNewLabel;
-	private JFormattedTextField formattedTextField;
-	private JLabel lblBordureBas;
-	private JFormattedTextField formattedTextField_1;
-	private JLabel lblRavine;
-	private JFormattedTextField formattedTextField_2;
-	private JLabel lblRewardBorder;
-	private JFormattedTextField formattedTextField_3;
-	private JLabel lblLimiteSpeed;
-	private JFormattedTextField formattedTextField_5;
-	private JLabel lblPuissance;
-	private JFormattedTextField formattedTextField_4;
-	private JLabel lblHauteurColine;
-	private JFormattedTextField formattedTextField_7;
-	private Label label;
-	private JFormattedTextField formattedTextField_8;
-	private JLabel lblDiscretisationPosition;
-	private JFormattedTextField formattedTextField_9;
-	private Label label_1;
-	private JFormattedTextField formattedTextField_10;
-	private JLabel lblVitesseActuelle;
-	private JFormattedTextField formattedTextField_6;
-	private JLabel lblPositionActuelle;
-	private JFormattedTextField formattedTextField_11;
-	private JPanel panel_simulation;
-	private JTabbedPane tabbedPane;
+	public JFrame frame;
+	public JPanel panel_modele;
+	public JLabel lblNewLabel;
+	public JFormattedTextField FieldBH;
+	public JLabel lblBordureBas;
+	public JFormattedTextField FieldBB;
+	public JLabel lblRavine;
+	public JFormattedTextField FieldRavine;
+	public JLabel lblRewardBorder;
+	public JFormattedTextField FieldRewardB;
+	public JLabel lblLimiteSpeed;
+	public JFormattedTextField FieldLimitSpeed;
+	public JLabel lblPuissance;
+	public JFormattedTextField FieldPower;
+	public JLabel lblHauteurColine;
+	public JFormattedTextField FieldHauteurColine;
+	public Label label;
+	public JFormattedTextField FieldPente;
+	public JLabel lblDiscretisationPosition;
+	public JFormattedTextField FieldDiscPosition;
+	public Label label_1;
+	public JFormattedTextField FieldDiscVitesse;
+	public JLabel lblVitesseActuelle;
+	public JFormattedTextField FieldVitesse;
+	public JLabel lblPositionActuelle;
+	public JFormattedTextField FieldPosition;
+	public JPanel panel_graph;
 	
-	private Graphique graph;
+	public Graphique graph;
+	public JButton btnLancerSimulation;
+	
+	public double[] data;
+	final XYSeries series1 = new XYSeries("Simulation");
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -76,13 +85,16 @@ public class Interface {
 				}
 			}
 		});
-	}
+		
+	}*/
 
 	/**
 	 * Create the application.
 	 */
 	public Interface() {
+	
 		initialize();
+		this.frame.setVisible(true);
 	}
 
 	/**
@@ -92,111 +104,135 @@ public class Interface {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1232, 699);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
 		
-		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+
+		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.X_AXIS));
 		
 		panel_modele = new JPanel();
-		tabbedPane.addTab("Modele", null, panel_modele, null);
-		panel_modele.setLayout(new MigLayout("", "[left][:229.00:100px,grow][47.00][grow]", "[][top][top][top][top][top][top][top][top][top][top][top][top][top][top][top][top][top]"));
+		frame.getContentPane().add(panel_modele);
+		panel_modele.setLayout(new MigLayout("", "[left][:229.00:100px,grow][47.00][grow,right]", "[][top][top][top][top][top][top][top][top][top][top][top][top][top][top][top][top][top]"));
 		
 		lblNewLabel = new JLabel("Bordure haut");
 		panel_modele.add(lblNewLabel, "cell 0 0,alignx left,aligny top");
 		
-		formattedTextField = new JFormattedTextField();
-		formattedTextField.setText("0,6");
-		panel_modele.add(formattedTextField, "cell 1 0,growx");
-		
-		JPanel panel_graph = new JPanel();
-		panel_graph.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel_modele.add(panel_graph, "cell 3 0 1 18,grow");
+		FieldBH = new JFormattedTextField();
+		FieldBH.setText("0,6");
+		panel_modele.add(FieldBH, "cell 1 0,growx");
 		
 		lblBordureBas = new JLabel("Bordure bas");
 		panel_modele.add(lblBordureBas, "cell 0 1,alignx left");
 		
-		formattedTextField_1 = new JFormattedTextField();
-		formattedTextField_1.setText("-1,2");
-		panel_modele.add(formattedTextField_1, "cell 1 1,growx");
+		FieldBB = new JFormattedTextField();
+		FieldBB.setText("-1,2");
+		panel_modele.add(FieldBB, "cell 1 1,growx");
 		
 		lblRavine = new JLabel("Ravine");
 		panel_modele.add(lblRavine, "cell 0 2,alignx left");
 		
-		formattedTextField_2 = new JFormattedTextField();
-		formattedTextField_2.setText("-1,55");
-		panel_modele.add(formattedTextField_2, "cell 1 2,growx");
+		FieldRavine = new JFormattedTextField();
+		FieldRavine.setText("-1,55");
+		panel_modele.add(FieldRavine, "cell 1 2,growx");
 		
 		lblRewardBorder = new JLabel("Reward border");
 		panel_modele.add(lblRewardBorder, "cell 0 3,alignx left");
 		
-		formattedTextField_3 = new JFormattedTextField();
-		formattedTextField_3.setText("0,55");
-		panel_modele.add(formattedTextField_3, "cell 1 3,growx");
+		FieldRewardB = new JFormattedTextField();
+		FieldRewardB.setText("0,55");
+		panel_modele.add(FieldRewardB, "cell 1 3,growx");
 		
 		lblLimiteSpeed = new JLabel("Limite speed");
 		panel_modele.add(lblLimiteSpeed, "cell 0 5,alignx left");
 		
-		formattedTextField_5 = new JFormattedTextField();
-		formattedTextField_5.setText("0,07");
-		panel_modele.add(formattedTextField_5, "cell 1 5,growx");
+		FieldLimitSpeed = new JFormattedTextField();
+		FieldLimitSpeed.setText("0,07");
+		panel_modele.add(FieldLimitSpeed, "cell 1 5,growx");
 		
 		lblPuissance = new JLabel("Puissance");
 		panel_modele.add(lblPuissance, "cell 0 6,alignx left");
 		
-		formattedTextField_4 = new JFormattedTextField();
-		formattedTextField_4.setText("0,01");
-		panel_modele.add(formattedTextField_4, "cell 1 6,growx");
+		FieldPower = new JFormattedTextField();
+		FieldPower.setText("0,01");
+		panel_modele.add(FieldPower, "cell 1 6,growx");
 		
 		lblHauteurColine = new JLabel("Hauteur coline");
 		panel_modele.add(lblHauteurColine, "cell 0 8,alignx left");
 		
-		formattedTextField_7 = new JFormattedTextField();
-		panel_modele.add(formattedTextField_7, "cell 1 8,growx");
+		FieldHauteurColine = new JFormattedTextField();
+		panel_modele.add(FieldHauteurColine, "cell 1 8,growx");
 		
 		label = new Label("Pente");
 		panel_modele.add(label, "cell 0 9");
 		
-		formattedTextField_8 = new JFormattedTextField();
-		panel_modele.add(formattedTextField_8, "cell 1 9,growx");
+		FieldPente = new JFormattedTextField();
+		panel_modele.add(FieldPente, "cell 1 9,growx");
 		
 		lblDiscretisationPosition = new JLabel("Discretisation position");
 		panel_modele.add(lblDiscretisationPosition, "cell 0 11,alignx left");
 		
-		formattedTextField_9 = new JFormattedTextField();
-		formattedTextField_9.setText("32");
-		panel_modele.add(formattedTextField_9, "cell 1 11,growx");
+		FieldDiscPosition = new JFormattedTextField();
+		FieldDiscPosition.setText("32");
+		panel_modele.add(FieldDiscPosition, "cell 1 11,growx");
 		
 		label_1 = new Label("Discretisation vitesse");
 		panel_modele.add(label_1, "cell 0 12,alignx left");
 		
-		formattedTextField_10 = new JFormattedTextField();
-		formattedTextField_10.setText("32");
-		panel_modele.add(formattedTextField_10, "cell 1 12,growx");
+		FieldDiscVitesse = new JFormattedTextField();
+		FieldDiscVitesse.setText("32");
+		panel_modele.add(FieldDiscVitesse, "cell 1 12,growx");
 		
 		lblVitesseActuelle = new JLabel("Vitesse actuelle");
 		panel_modele.add(lblVitesseActuelle, "cell 0 14,alignx left");
 		
-		formattedTextField_6 = new JFormattedTextField();
-		formattedTextField_6.setText("0");
-		panel_modele.add(formattedTextField_6, "cell 1 14,growx");
+		FieldVitesse = new JFormattedTextField();
+		FieldVitesse.setText("0");
+		panel_modele.add(FieldVitesse, "cell 1 14,growx");
 		
 		lblPositionActuelle = new JLabel("Position actuelle");
 		panel_modele.add(lblPositionActuelle, "cell 0 15,alignx left");
 		
-		formattedTextField_11 = new JFormattedTextField();
-		formattedTextField_11.setText("0");
-		panel_modele.add(formattedTextField_11, "cell 1 15,growx");
+		FieldPosition = new JFormattedTextField();
+		FieldPosition.setText("0");
+		panel_modele.add(FieldPosition, "cell 1 15,growx");
 		
-		panel_simulation = new JPanel();
-		tabbedPane.addTab("Simulation", null, panel_simulation, null);
-		
-		//panel_graph.add(Graphique.Graphique());
-		double[] data = new double[10];
-		for(int i =0;i<data.length;i++)
+		btnLancerSimulation = new JButton("Lancer Simulation");
+		btnLancerSimulation.addActionListener(new ActionListener()
 		{
-			data[i]=i;
-		}
+			public void actionPerformed(ActionEvent arg0)
+			{
+				ValueIteration.init(100, 100, -1.2, -1.15, 0.54, 0.6, 0.07, 0.99, 0.01, 0, 0, 0.0025, 3, 0.001);
+				Algorithm.creation_values();
+				Algorithm.convergence();
+				Algorithm.set_action();
+				
+				int t = 0;
+				while(ValueIteration.current_position != 99 ){
+					if (ValueIteration.X_array.get(ValueIteration.current_position) <= ValueIteration.ravine){
+						System.out.println("You're dead game over!!!!!!");
+						break;
+					}
+					ValueIteration.speed_position_update();
+					series1.add(ValueIteration.X_array.get(ValueIteration.current_position),ValueIteration.speed_array.get(ValueIteration.current_speed));
+					t++;
+					
+				}
+				System.out.println("Nombre d'itération = "+t);
+				
+				panel_graph.removeAll();
+				panel_graph.add(Graphique.createChart(series1));
+				frame.pack();
+				
+			}
+		});
+		panel_modele.add(btnLancerSimulation, "cell 0 17");
 		
-		panel_graph.add(Graphique.createChart(data));
-		frame.getContentPane().add(tabbedPane);
+		panel_graph = new JPanel();
+		panel_graph.setAlignmentY(Component.TOP_ALIGNMENT);
+		panel_graph.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		frame.getContentPane().add(panel_graph);
+		panel_graph.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		
+		
+		
+		
 	}
 }
