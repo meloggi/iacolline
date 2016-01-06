@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;algo-markov&apos;" deleteContents="true" description="Delete resource &apos;algo-markov&apos;" element1="/algo-markov" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1451941540720"/>
+</session>
