@@ -76,6 +76,9 @@ public class Interface {
 	final XYSeries seriesVitesse = new XYSeries("Vitesse");
 	final XYSeries seriesPosition = new XYSeries("Position");
 	private JScrollPane scrollPane;
+	private JTabbedPane tabbedPane;
+	private JPanel panel_simulation;
+	private JPanel panel_Voiture;
 
 	/**
 	 * Launch the application.
@@ -111,10 +114,17 @@ public class Interface {
 	//	frame.setBounds(100, 100, 1232, 699);
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(new MigLayout("", "[334.00px][771.00px,grow,right]", "[643px,grow]"));
+		frame.getContentPane().setLayout(new MigLayout("", "[970.00px,grow]", "[643px,grow]"));
+		
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		frame.getContentPane().add(tabbedPane, "cell 0 0,grow");
+		
+		panel_simulation = new JPanel();
+		tabbedPane.addTab("New tab", null, panel_simulation, null);
+		panel_simulation.setLayout(new MigLayout("", "[332.00px,left][176.00,grow]", "[550px,grow][1px]"));
 		
 		panel_modele = new JPanel();
-		frame.getContentPane().add(panel_modele, "cell 0 0,alignx left,aligny top");
+		panel_simulation.add(panel_modele, "cell 0 0,alignx left,aligny top");
 		panel_modele.setLayout(new MigLayout("", "[left][:229.00:100px,grow][47.00]", "[][top][top][top][top][top][top][top][top][top][top][top][top][top][top][top][top][top]"));
 		
 		lblNewLabel = new JLabel("Bordure haut");
@@ -235,7 +245,7 @@ public class Interface {
 		panel_modele.add(btnLancerSimulation, "cell 0 17");
 		
 		scrollPane = new JScrollPane();
-		frame.getContentPane().add(scrollPane, "cell 1 0,grow");
+		panel_simulation.add(scrollPane, "cell 1 0,grow");
 		
 		panel_graph = new JPanel();
 		scrollPane.setViewportView(panel_graph);
@@ -243,6 +253,9 @@ public class Interface {
 		panel_graph.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		panel_graph.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel_graph.setLayout(new GridLayout(3, 1));
+		
+		panel_Voiture = new JPanel();
+		tabbedPane.addTab("New tab", null, panel_Voiture, null);
 		
 		
 		
