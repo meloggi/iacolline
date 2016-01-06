@@ -214,21 +214,21 @@ public class Interface {
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
-				ValueIteration.init(100, 100, -1.2, -1.15, 0.54, 0.6, 0.07, 0.99, 0.01, 0, 0, 0.0025, 3, 0.001);
+				Modele.init(100, 100, -1.2, -1.15, 0.54, 0.6, 0.07, 0.99, 0.01, 0, 0, 0.0025, 3, 0.001);
 				Algorithm.creation_values();
 				Algorithm.convergence();
 				Algorithm.set_action();
 				
 				int t = 0;
-				while(ValueIteration.current_position != 99 ){
-					if (ValueIteration.X_array.get(ValueIteration.current_position) <= ValueIteration.ravine){
+				while(Modele.current_position != 99 ){
+					if (Modele.X_array.get(Modele.current_position) <= Modele.ravine){
 						System.out.println("You're dead game over!!!!!!");
 						break;
 					}
-					ValueIteration.speed_position_update();
-					series1.add(ValueIteration.X_array.get(ValueIteration.current_position),ValueIteration.speed_array.get(ValueIteration.current_speed));
-					seriesPosition.add(t,ValueIteration.X_array.get(ValueIteration.current_position));
-					seriesVitesse.add(t,ValueIteration.speed_array.get(ValueIteration.current_speed));
+					Modele.speed_position_update();
+					series1.add(Modele.X_array.get(Modele.current_position),Modele.speed_array.get(Modele.current_speed));
+					seriesPosition.add(t,Modele.X_array.get(Modele.current_position));
+					seriesVitesse.add(t,Modele.speed_array.get(Modele.current_speed));
 					t++;
 					
 				}

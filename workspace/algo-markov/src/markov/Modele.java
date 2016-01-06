@@ -2,7 +2,7 @@ package markov;
 
 import java.util.ArrayList;
 
-public class ValueIteration {
+public class Modele {
 
 	static double gamma; 
 	static double epsilon;
@@ -24,7 +24,7 @@ public class ValueIteration {
 	static int current_speed;
 	static double power;
 	
-/*	public ValueIteration(double gamma, double epsilon, int discretisation_position, int discretisation_speed, double height, double slope, double ravine, double limit_speed, double high_border, double low_border, double reward_border ){
+/*	public Modele(double gamma, double epsilon, int discretisation_position, int discretisation_speed, double height, double slope, double ravine, double limit_speed, double high_border, double low_border, double reward_border ){
 		this.gamma = gamma;
 		this.epsilon = epsilon;
 		this.discretisation_position = discretisation_position;
@@ -85,20 +85,20 @@ public class ValueIteration {
 	}
 	
 	public static void init(int discretisation_position, int discretisation_speed, double low_border, double ravine, double reward_border,double high_border, double limit_speed, double gamma, double epsilon, double current_position_value, double current_speed_value, double height, double slope, double power){
-		ValueIteration.gamma = gamma;
-		ValueIteration.epsilon = epsilon;
-		ValueIteration.discretisation_position = discretisation_position;
-		ValueIteration.discretisation_speed = discretisation_speed;
-		ValueIteration.ravine = ravine;
-		ValueIteration.limit_speed = limit_speed;
-		ValueIteration.high_border = high_border;
-		ValueIteration.low_border = low_border;
-		ValueIteration.height = height; 
-		ValueIteration.slope = slope;
-		ValueIteration.power = power;
-		ValueIteration.reward_border = reward_border;
-		System.out.println("Gamma = "+ValueIteration.gamma);
-		System.out.println("Epsilon = "+ValueIteration.epsilon);
+		Modele.gamma = gamma;
+		Modele.epsilon = epsilon;
+		Modele.discretisation_position = discretisation_position;
+		Modele.discretisation_speed = discretisation_speed;
+		Modele.ravine = ravine;
+		Modele.limit_speed = limit_speed;
+		Modele.high_border = high_border;
+		Modele.low_border = low_border;
+		Modele.height = height; 
+		Modele.slope = slope;
+		Modele.power = power;
+		Modele.reward_border = reward_border;
+		System.out.println("Gamma = "+Modele.gamma);
+		System.out.println("Epsilon = "+Modele.epsilon);
 		set_frequency_position(discretisation_position, low_border, high_border); 
 		set_frequency_speed(discretisation_speed, limit_speed);
 		set_X(discretisation_position, low_border);
@@ -117,36 +117,36 @@ public class ValueIteration {
 	
 	public static void set_current_position(double position){
 		if(position >= X_array.get(discretisation_position-1)){
-			ValueIteration.current_position = discretisation_position-1;
+			Modele.current_position = discretisation_position-1;
 		}else if(position <= X_array.get(0)){
-			ValueIteration.current_position = 0;
+			Modele.current_position = 0;
 		}else{
 			int i = 0;
 			while (position >= X_array.get(i)){
 				i++;
 			}
 			if( (Math.abs(Math.abs(position)-Math.abs(X_array.get(i-1)))) < (Math.abs(Math.abs(position)-Math.abs(X_array.get(i)))) ){
-				ValueIteration.current_position = i-1;
+				Modele.current_position = i-1;
 			}else{
-				ValueIteration.current_position = i;
+				Modele.current_position = i;
 			}
 		}
 	}
 	
 	public static void set_current_speed(double speed){
 		if(speed >= speed_array.get(discretisation_speed-1)){
-			ValueIteration.current_speed = discretisation_speed-1;
+			Modele.current_speed = discretisation_speed-1;
 		}else if(speed <= speed_array.get(0)){
-			ValueIteration.current_speed = 0;
+			Modele.current_speed = 0;
 		}else{
 			int i = 0;
 			while (speed >= speed_array.get(i)){
 				i++;
 			}
 			if( (Math.abs(Math.abs(speed)-Math.abs(speed_array.get(i-1)))) < (Math.abs(Math.abs(speed)-Math.abs(speed_array.get(i)))) ){
-				ValueIteration.current_speed = i-1;
+				Modele.current_speed = i-1;
 			}else{
-				ValueIteration.current_speed = i;
+				Modele.current_speed = i;
 			}
 		}
 	}
