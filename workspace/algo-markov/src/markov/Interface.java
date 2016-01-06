@@ -1,42 +1,23 @@
 package markov;
 
-import java.awt.EventQueue;
+
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
-import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
-
 import org.jfree.data.xy.XYSeries;
-
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.JSeparator;
 import javax.swing.JScrollPane;
-import javax.swing.JToggleButton;
-import javax.swing.Box;
 import java.awt.Component;
-import java.awt.Dimension;
 import javax.swing.JTabbedPane;
-import javax.swing.JToolBar;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JFormattedTextField;
 import java.awt.Label;
-import java.awt.Button;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import java.awt.GridLayout;
-import javax.swing.BoxLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.FlowLayout;
-import java.awt.CardLayout;
-import java.awt.GridBagLayout;
+import java.awt.Frame;
 
 public class Interface {
 
@@ -111,8 +92,7 @@ public class Interface {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-	//	frame.setBounds(100, 100, 1232, 699);
-		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		frame.setExtendedState(Frame.MAXIMIZED_BOTH);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new MigLayout("", "[970.00px,grow]", "[643px,grow]"));
 		
@@ -120,7 +100,7 @@ public class Interface {
 		frame.getContentPane().add(tabbedPane, "cell 0 0,grow");
 		
 		panel_simulation = new JPanel();
-		tabbedPane.addTab("New tab", null, panel_simulation, null);
+		tabbedPane.addTab("Données Modele", null, panel_simulation, null);
 		panel_simulation.setLayout(new MigLayout("", "[332.00px,left][176.00,grow]", "[550px,grow][1px]"));
 		
 		panel_modele = new JPanel();
@@ -235,9 +215,9 @@ public class Interface {
 				System.out.println("Nombre d'itÃ©ration = "+t);
 				
 				panel_graph.removeAll();
-				panel_graph.add(Graphique.createChart(series1));
-				panel_graph.add(Graphique.createChart(seriesPosition));
-				panel_graph.add(Graphique.createChart(seriesVitesse));
+				panel_graph.add(Graphique.createChart(series1,"","Position","Vitesse"));
+				panel_graph.add(Graphique.createChart(seriesPosition,"","Temps","Vitesse"));
+				panel_graph.add(Graphique.createChart(seriesVitesse,"","Temps","Vitesse"));
 				frame.pack();
 				
 			}
@@ -255,7 +235,7 @@ public class Interface {
 		panel_graph.setLayout(new GridLayout(3, 1));
 		
 		panel_Voiture = new JPanel();
-		tabbedPane.addTab("New tab", null, panel_Voiture, null);
+		tabbedPane.addTab("Simulation", null, panel_Voiture, null);
 		
 		
 		
