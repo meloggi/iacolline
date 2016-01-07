@@ -22,6 +22,7 @@ public class Modele {
 	static ArrayList<Double> reward = new ArrayList<Double>();
 	static int current_position;
 	static int current_speed;
+	static double current_altitude;
 	static double power;
 	
 /*	public Modele(double gamma, double epsilon, int discretisation_position, int discretisation_speed, double height, double slope, double ravine, double limit_speed, double high_border, double low_border, double reward_border ){
@@ -160,6 +161,10 @@ public class Modele {
 		}
 	}
 	
+	public static void set_current_altitude(double position){
+		Modele.current_altitude = (Modele.height/Modele.slope)*Math.sin(Modele.slope * position);
+	}
+	
 	public static void speed_position_update(){
 		System.out.println("Position précédente: "+current_position);
 		System.out.println("Vitesse précédente: "+current_speed);
@@ -167,6 +172,7 @@ public class Modele {
 		double calculate_speed = speed_array.get(current_speed) + power * Algorithm.Action.get(Algorithm.get_index_value(current_speed, current_position)) - height * Math.cos(slope * X_array.get(current_position));
 		set_current_speed(calculate_speed);
 		set_current_position(calculate_position);
+		set_current_altitude(calculate_position);
 		System.out.println("Position actualisée: "+current_position);
 		System.out.println("Vitesse actualisée: "+current_speed);
 	}

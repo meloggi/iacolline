@@ -117,7 +117,7 @@ public class Interface {
 		frame.getContentPane().add(tabbedPane, "cell 0 0,grow");
 
 		panel_simulation = new JPanel();
-		tabbedPane.addTab("Données Modele", null, panel_simulation, null);
+		tabbedPane.addTab("Donnï¿½es Modele", null, panel_simulation, null);
 		panel_simulation.setLayout(new MigLayout("", "[332.00px,left][176.00,grow]", "[550px,grow][1px]"));
 
 		panel_modele = new JPanel();
@@ -212,6 +212,7 @@ public class Interface {
 			public void actionPerformed(ActionEvent arg0)
 			{
 				Modele.init(100, 100, -1.2, -1.15, 0.54, 0.6, 0.07, 0.99, 0.01, 0, 0, 0.0025, 3, 0.001);
+				Modele.set_current_altitude(Modele.current_position);
 				Algorithm.creation_values();
 				Algorithm.convergence();
 				Algorithm.set_action();
