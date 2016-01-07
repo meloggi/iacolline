@@ -86,6 +86,12 @@ public class Modele {
 	}
 	
 	public static void init(int discretisation_position, int discretisation_speed, double low_border, double ravine, double reward_border,double high_border, double limit_speed, double gamma, double epsilon, double current_position_value, double current_speed_value, double height, double slope, double power){
+		
+		X_array.clear();
+		speed_array.clear();
+		reward.clear();
+		
+		
 		Modele.gamma = gamma;
 		Modele.epsilon = epsilon;
 		Modele.discretisation_position = discretisation_position;
@@ -166,15 +172,15 @@ public class Modele {
 	}
 	
 	public static void speed_position_update(){
-		System.out.println("Position précédente: "+current_position);
-		System.out.println("Vitesse précédente: "+current_speed);
+		//System.out.println("Position précédente: "+current_position);
+		//System.out.println("Vitesse précédente: "+current_speed);
 		double calculate_position = X_array.get(current_position) + speed_array.get(current_speed);
 		double calculate_speed = speed_array.get(current_speed) + power * Algorithm.Action.get(Algorithm.get_index_value(current_speed, current_position)) - height * Math.cos(slope * X_array.get(current_position));
 		set_current_speed(calculate_speed);
 		set_current_position(calculate_position);
 		set_current_altitude(calculate_position);
-		System.out.println("Position actualisée: "+current_position);
-		System.out.println("Vitesse actualisée: "+current_speed);
+		//System.out.println("Position actualisée: "+current_position);
+		//System.out.println("Vitesse actualisée: "+current_speed);
 	}
 	
 	/*public static void main(String[] args) {
