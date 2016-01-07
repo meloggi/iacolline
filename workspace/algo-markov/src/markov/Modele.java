@@ -20,10 +20,16 @@ public class Modele {
 	static ArrayList<Double> X_array = new ArrayList<Double>();
 	static ArrayList<Double> speed_array = new ArrayList<Double>();
 	static ArrayList<Double> reward = new ArrayList<Double>();
+	static ArrayList<Double> road = new ArrayList<Double>();
+	static ArrayList<Double> hole = new ArrayList<Double>();
 	static int current_position;
 	static int current_speed;
 	static double current_altitude;
+	static double current_hole;
 	static double power;
+	static int inc = 0;
+	static int inc2 = 0;
+	static double current_road;
 	
 /*	public Modele(double gamma, double epsilon, int discretisation_position, int discretisation_speed, double height, double slope, double ravine, double limit_speed, double high_border, double low_border, double reward_border ){
 		this.gamma = gamma;
@@ -183,20 +189,19 @@ public class Modele {
 		//System.out.println("Vitesse actualisée: "+current_speed);
 	}
 	
-	/*public static void main(String[] args) {
-		init(32, 32, -1.2, -1.15, 0.54, 0.6, 0.07, 0.99, 0.01, 0, 0, 0.0025, 3, 0.001);
-		for(int j = 0; j < 100; j++){
-			speed_position_update();
+	public static void set_road(){
+		while ((inc * frequency_position/4 + Modele.ravine) <= (Modele.high_border)){
+			Modele.current_road = (Modele.height/Modele.slope)*Math.sin(Modele.slope * (inc * frequency_position/4 + Modele.ravine));
+			Modele.road.add(current_road);
+			inc ++;
 		}
-		//set_current_reward(32, 3);
-		//set_X(32, -1.2);
-		//set_current_position(0.4874999999999998);
-		//set_speed(32, 0.07);
-		//set_current_speed(0.06125);
-		//set_frequency_position(32, -1.2, 0.6);
-		//set_frequency_speed(32, 0.07);
-		//set_X(32, -1.2);
-		//set_speed(32, 0.07);
-		//set_reward_init(32, -1.15);
-	}*/
+	}
+	
+	public static void set_hole(){
+		while ((inc2 * frequency_position/4 + Modele.low_border) <= (Modele.ravine)){
+			Modele.current_hole = (Modele.height/Modele.slope)*Math.sin(Modele.slope * (inc2 * frequency_position/4 + Modele.low_border));
+			Modele.hole.add(current_hole);
+			inc2 ++;
+		}
+	}
 }

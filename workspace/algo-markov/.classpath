@@ -4,7 +4,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
 	<classpathentry kind="lib" path="jgoodies-forms-1.8.0.jar" sourcepath="jgoodies-forms-1.8.0-sources.jar"/>
 	<classpathentry kind="lib" path="miglayout15-swing.jar" sourcepath="miglayout-src.zip"/>
-	<classpathentry kind="lib" path="/home/komel/Bureau/iacolline/workspace/algo-markov/jfreechart-1.0.19.jar"/>
-	<classpathentry kind="lib" path="/home/komel/Bureau/iacolline/workspace/algo-markov/jcommon-1.0.23.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Didier/Documents/Telecom Nancy/3A/IA/FInal/iacolline/workspace/algo-markov/jfreechart-1.0.19.jar" sourcepath="jfreechart-1.0.19.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Didier/Documents/Telecom Nancy/3A/IA/FInal/iacolline/workspace/algo-markov/jcommon-1.0.23.jar" sourcepath="jcommon-1.0.23.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

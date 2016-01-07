@@ -7,6 +7,7 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.xy.XYDataItem;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
@@ -59,7 +60,7 @@ public class Graphique {
 		XYSeriesCollection dts = new XYSeriesCollection();
 		dts.addSeries(seriesPosition);
 		dts.addSeries(seriesVitesse);
-		JFreeChart jfc = ChartFactory.createXYLineChart(
+		JFreeChart jfc = ChartFactory.createScatterPlot(
 				titre,
 				LegendX,
 				LegendY,  
@@ -71,4 +72,5 @@ public class Graphique {
 		);
 		return  new ChartPanel(jfc);
 	}
+
 }

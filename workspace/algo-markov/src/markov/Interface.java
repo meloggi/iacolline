@@ -32,6 +32,8 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 
 import java.awt.Rectangle;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Interface {
 
@@ -77,10 +79,15 @@ public class Interface {
 	XYSeries series1 = new XYSeries("Simulation");
 	XYSeries seriesVitesse = new XYSeries("Vitesse");
 	XYSeries seriesPosition = new XYSeries("Position");
+	XYSeries seriesAlt = new XYSeries("Altitude");
+	XYSeries serieRoute = new XYSeries("Route");
+	
 
 	XYSeries Saveseries1 = new XYSeries("Simulation");
 	XYSeries SaveseriesVitesse = new XYSeries("Vitesse");
 	XYSeries SaveseriesPosition = new XYSeries("Position");
+	XYSeries SaveseriesAlt = new XYSeries("Altitude");
+	XYSeries SaveserieVoiture = new XYSeries("Voiture");
 
 
 	private JScrollPane scrollPane;
@@ -262,11 +269,30 @@ public class Interface {
 				Saveseries1.clear();
 				SaveseriesPosition.clear();
 				SaveseriesVitesse.clear();
+				Modele.road.clear();
+				Modele.hole.clear();
+				Modele.inc = 0;
+				Modele.inc2 = 0;
 				Modele.init(Integer.parseInt(FieldDiscPosition.getText()), Integer.parseInt(FieldDiscVitesse.getText()),Double.parseDouble(FieldBB.getText()), Double.parseDouble(FieldRavine.getText()),Double.parseDouble(FieldRewardB.getText()), Double.parseDouble(FieldBH.getText()),Double.parseDouble(FieldLimitSpeed.getText()), Double.parseDouble(FieldGamma.getText()), Double.parseDouble(FieldEpsilon.getText()),Double.parseDouble(FieldPosition.getText()),Double.parseDouble(FieldVitesse.getText()),Double.parseDouble(FieldHauteurColine.getText()),Double.parseDouble(FieldPente.getText()),Double.parseDouble(FieldPower.getText()));
 				Modele.set_current_altitude(Modele.current_position);
 				Algorithm.creation_values();
 				Algorithm.convergence();
 				Algorithm.set_action();
+				Modele.set_road();
+				Modele.set_hole();
+				
+
+				for (int i=0; i < Modele.hole.size();i++)
+				{
+					double y = i * Modele.frequency_position/4 + Modele.low_border;
+					double x = Modele.hole.get(i);
+					serieRoute.add(y,x);
+				}
+				for (int i=0; i < Modele.road.size();i++)
+				{
+					serieRoute.add(i * Modele.frequency_position/4 + Modele.ravine,Modele.road.get(i));
+				}
+					
 
 				int t = 0;
 				//System.out.println(Modele.current_position);
@@ -285,6 +311,7 @@ public class Interface {
 					Saveseries1.add(Modele.X_array.get(Modele.current_position),Modele.speed_array.get(Modele.current_speed));
 					SaveseriesPosition.add(t,Modele.X_array.get(Modele.current_position));
 					SaveseriesVitesse.add(t,Modele.speed_array.get(Modele.current_speed));
+					SaveseriesAlt.add(Modele.X_array.get(Modele.current_position),(Number)Modele.current_altitude);
 					t++;
 					
 				}
@@ -295,32 +322,13 @@ public class Interface {
 				compteur=1;
 
 
-				//renverser le tableau
-				/*
-				for (int i = t-1;i>0;i--)
-				{
-					series1.add(Saveseries1.getX(i),Saveseries1.getY(i));
-					seriesPosition.add(SaveseriesPosition.getX(i),SaveseriesPosition.getY(i));
-					seriesVitesse.add(SaveseriesVitesse.getX(i),SaveseriesVitesse.getY(i));
-				}
-
-				try {
-					Saveseries1 = series1;
-					SaveseriesPosition = (XYSeries) seriesPosition.clone();
-					SaveseriesVitesse = (XYSeries) seriesVitesse.clone();
-
-
-				} catch (CloneNotSupportedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				 */
-
 				double vide[]={0};
+				
 
 
 				panel_graph.removeAll();
-				panel_graph.add(Graphique.createChart(vide,"","Position","Vitesse"));
+				panel_graph.add(Graphique.createChart(Saveseries1,"","Position","Vitesse"));
+				panel_graph.add(Graphique.createChart(SaveseriesAlt,serieRoute,"","Altitude","Position"));
 				panel_graph.add(Graphique.createChart(vide,"","Temps","Position"));
 				panel_graph.add(Graphique.createChart(vide,"","Temps","Vitesse"));
 				frame.repaint();
@@ -330,6 +338,19 @@ public class Interface {
 		panel_modele.add(btnLancerSimulation, "cell 0 17,growx");
 
 		btnPrecedent = new JButton("Previous");
+		btnPrecedent.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) 
+			{
+				int key = e.getKeyCode();
+		        if (key == KeyEvent.VK_LEFT) 
+		        {
+		        	btnPrecedent.doClick();
+		        }
+				
+				
+			}
+		});
 		btnPrecedent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
@@ -346,9 +367,10 @@ public class Interface {
 
 
 				try {
-					series1 = (XYSeries) Saveseries1.clone();
+					//series1 = (XYSeries) Saveseries1.clone();
 					seriesPosition = (XYSeries) SaveseriesPosition.clone();
 					seriesVitesse = (XYSeries) SaveseriesVitesse.clone();
+					//seriesAlt = (XYSeries) SaveseriesAlt.clone();
 
 
 				} catch (CloneNotSupportedException e1) {
@@ -356,11 +378,13 @@ public class Interface {
 					e1.printStackTrace();
 				}
 
-				series1.delete(compteur, compteurMax-1);
+			//	series1.delete(compteur, compteurMax-1);
 				seriesPosition.delete(compteur, compteurMax-1);
 				seriesVitesse.delete(compteur, compteurMax-1);
+				//seriesAlt.delete(compteur, compteurMax-1);
 				panel_graph.removeAll();
-				panel_graph.add(Graphique.createChart(series1,"","Position","Vitesse"));
+				panel_graph.add(Graphique.createChart(Saveseries1,"","Position","Vitesse"));
+				panel_graph.add(Graphique.createChart(SaveseriesAlt,serieRoute,"","Position","Altitude"));
 				panel_graph.add(Graphique.createChart(seriesPosition,"","Temps","Position"));
 				panel_graph.add(Graphique.createChart(seriesVitesse,"","Temps","Vitesse"));
 				frame.repaint();
@@ -369,6 +393,19 @@ public class Interface {
 		panel_modele.add(btnPrecedent, "cell 0 18,growx");
 
 		btnSuivant = new JButton("Next");
+		btnSuivant.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) 
+			{
+				int key = e.getKeyCode();
+		        if (key == KeyEvent.VK_RIGHT) 
+		        {
+		        	btnSuivant.doClick();
+		        }
+				
+				
+			}
+		});
 		btnSuivant.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
@@ -385,9 +422,10 @@ public class Interface {
 
 
 				try {
-					series1 = (XYSeries) Saveseries1.clone();
+				//	series1 = (XYSeries) Saveseries1.clone();
 					seriesPosition = (XYSeries) SaveseriesPosition.clone();
 					seriesVitesse = (XYSeries) SaveseriesVitesse.clone();
+				//	seriesAlt = (XYSeries) SaveseriesAlt.clone();
 
 
 				} catch (CloneNotSupportedException e1) {
@@ -395,11 +433,12 @@ public class Interface {
 					e1.printStackTrace();
 				}
 
-				series1.delete(compteur, compteurMax-1);
+			//	series1.delete(compteur, compteurMax-1);
 				seriesPosition.delete(compteur, compteurMax-1);
 				seriesVitesse.delete(compteur, compteurMax-1);
 				panel_graph.removeAll();
-				panel_graph.add(Graphique.createChart(series1,"","Position","Speed"));
+				panel_graph.add(Graphique.createChart(Saveseries1,"","Position","Speed"));
+				panel_graph.add(Graphique.createChart(SaveseriesAlt,serieRoute,"","Position","Altitude"));
 				panel_graph.add(Graphique.createChart(seriesPosition,"","Time","Position"));
 				panel_graph.add(Graphique.createChart(seriesVitesse,"","Time","Speed"));
 				frame.repaint();
