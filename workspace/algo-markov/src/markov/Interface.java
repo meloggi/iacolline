@@ -93,7 +93,6 @@ public class Interface {
 	private JScrollPane scrollPane;
 	private JTabbedPane tabbedPane;
 	private JPanel panel_simulation;
-	private JPanel panel_Voiture;
 	private JButton btnSuivant;
 	private JButton btnPrecedent;
 	private JSlider slider;
@@ -462,9 +461,6 @@ public class Interface {
 		panel_graph.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		panel_graph.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel_graph.setLayout(new GridLayout(3, 1));
-
-		panel_Voiture = new JPanel();
-		tabbedPane.addTab("Simulation", null, panel_Voiture, null);
 
 		slider = new JSlider();
 		slider.addChangeListener(new ChangeListener() {
